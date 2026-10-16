@@ -9,6 +9,7 @@ const POLL_INTERVAL = 2000;
 export default function App() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [sending, setSending] = useState<boolean>(false);
+  const [pendingText, setPendingText] = useState<string | null>(null); // ข้อความที่ส่งไปแล้ว รอบอทตอบ
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -30,6 +31,7 @@ export default function App() {
 
   async function handleSend(text: string) {
     setSending(true);
+    setPendingText(text);
     try {
       const { userMessage, assistantMessage } = await sendMessage(text);
       setMessages((prev) => [...prev, userMessage, assistantMessage]);
@@ -38,6 +40,7 @@ export default function App() {
       setError("ส่งข้อความไม่สำเร็จ — BE รันอยู่ไหม?");
     }
     setSending(false);
+    setPendingText(null);
   }
 
   async function handleClear() {
@@ -80,7 +83,12 @@ export default function App() {
 
       {error && <div className="error-banner">{error}</div>}
 
-      <ChatLog messages={messages} onUpdate={handleUpdate} onDelete={handleDelete} />
+      <ChatLog
+        messages={messages}
+        pendingText={pendingText}
+        onUpdate={handleUpdate}
+        onDelete={handleDelete}
+      />
       <Composer onSend={handleSend} disabled={sending} />
     </div>
   );
