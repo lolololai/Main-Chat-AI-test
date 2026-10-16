@@ -12,9 +12,7 @@ const app = express();
 
 app.use(express.json());
 
-const MAX_HISTORY = 10;
-
-app.get("/", (req, res) => {
+app.get("/",(req, res) => {
   res.send("Hello, World!");
 });
 
@@ -30,11 +28,9 @@ app.post("/messages", async (req, res) => {
   }
   const userText = text.trim();
 
-  const history = recentMessages(MAX_HISTORY).map((m) => ({ role: m.role, content: m.text }));
-
   let replyText: string;
   try {
-    replyText = await getReply(userText, history);
+    replyText = await getReply(userText);
   } catch (err) {
     const e = err as { status?: number; message?: string };
     console.error("LLM error:", e.status ?? "-", e.message);
