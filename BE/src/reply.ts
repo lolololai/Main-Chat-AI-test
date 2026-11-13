@@ -1,4 +1,19 @@
+import { getPortfolioContext } from "./db";
 import { askLlm, isLlmConfigured, type ChatTurn } from "./llm";
+
+const RULES = `# Persona
+คุณคือผู้ช่วยแนะนำผลงานของเจ้าของเว็บนี้ พูดสุภาพ เป็นกันเอง
+
+# Task
+ตอบคำถามของผู้เยี่ยมชมเกี่ยวกับตัวตนและผลงานของเจ้าของเว็บ
+
+# Format
+- ตอบเป็นภาษาไทย
+- กระชับ ไม่เกิน 4 ประโยค
+
+# Rules
+- ตอบเฉพาะจาก "ข้อมูล portfolio" ด้านล่างเท่านั้น
+- ถ้าไม่รู้หรือไม่แน่ใจ ให้บอกตรง ๆ ว่าไม่ทราบ อย่าเดา`;
 
 const FALLBACK_REPLIES: string[] = [
   "รับทราบครับ!",
@@ -10,13 +25,32 @@ const FALLBACK_REPLIES: string[] = [
 
 let warned = false;
 
-export async function getReply(text: string, history: ChatTurn[] = []): Promise<string> {
+// system prompt = กฎ + ข้อมูล portfolio จาก SQLite (อ่านใหม่ทุกครั้ง แก้ข้อมูลแล้วบอทรู้ทันที)
+export function buildSystemPrompt(): string {
+  return `${RULES}
+
+=== ข้อมูล portfolio ===
+${getPortfolioContext()}
+=== จบข้อมูล ===`;
+}
+
+export async function getReply(
+  text: string,
+  history: ChatTurn[] = [],
+): Promise<string> {
   if (!isLlmConfigured()) {
     if (!warned) {
-      console.warn("⚠️  ยังไม่ได้ตั้ง LLM_API_KEY ใน BE/.env — ใช้คำตอบสุ่มแทน AI จริง (ดู BE/.env.example)");
+      console.warn(
+        "⚠️  ยังไม่ได้ตั้ง LLM_API_KEY ใน BE/.env — ใช้คำตอบสุ่มแทน AI จริง (ดู BE/.env.example)",
+      );
       warned = true;
     }
-    return FALLBACK_REPLIES[Math.floor(Math.random() * FALLBACK_REPLIES.length)];
+    return FALLBACK_REPLIES[
+      Math.floor(Math.random() * FALLBACK_REPLIES.length)
+    ];
   }
-  return askLlm("", [...history, { role: "user", content: text }]);
+  return askLlm(buildSystemPrompt(), [
+    ...history,
+    { role: "user", content: text },
+  ]);
 }

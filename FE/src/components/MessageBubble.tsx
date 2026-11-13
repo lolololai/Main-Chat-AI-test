@@ -7,6 +7,18 @@ interface MessageBubbleProps {
   onDelete: (id: number) => void;
 }
 
+function formatTime(createdAt?: string): string {
+  if (!createdAt) return '';
+  // แปลง ISO/UTC string หรือ SQLite CURRENT_TIMESTAMP string เป็นเวลา HH:mm
+  const date = new Date(createdAt.endsWith('Z') ? createdAt : `${createdAt}Z`);
+  if (isNaN(date.getTime())) return '';
+  return date.toLocaleTimeString('th-TH', {
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false,
+  });
+}
+
 export default function MessageBubble({ message, onUpdate, onDelete }: MessageBubbleProps) {
   const isUser: boolean = message.role === 'user';
   const [editing, setEditing] = useState(false);
@@ -23,6 +35,8 @@ export default function MessageBubble({ message, onUpdate, onDelete }: MessageBu
     onUpdate(message.id, trimmed);
     setEditing(false);
   }
+
+  const timeString = formatTime(message.createdAt);
 
   return (
     <div className={`bubble-row ${isUser ? 'row-user' : 'row-assistant'}`}>
@@ -46,9 +60,12 @@ export default function MessageBubble({ message, onUpdate, onDelete }: MessageBu
         ) : (
           <>
             {message.text}
-            <div className="bubble-actions">
-              {isUser && <button onClick={startEdit}>แก้ไข</button>}
-              <button onClick={() => onDelete(message.id)}>ลบ</button>
+            <div className="bubble-footer">
+              {timeString && <span className="bubble-time">{timeString}</span>}
+              <div className="bubble-actions">
+                {isUser && <button onClick={startEdit}>แก้ไข</button>}
+                <button onClick={() => onDelete(message.id)}>ลบ</button>
+              </div>
             </div>
           </>
         )}

@@ -1,10 +1,11 @@
-import { DatabaseSync } from "node:sqlite";
 import path from "node:path";
+import { DatabaseSync } from "node:sqlite";
 
 export interface Message {
   id: number;
   role: "user" | "assistant";
   text: string;
+  createdAt?: string;
 }
 
 const DB_FILE = process.env.DB_PATH || path.join(__dirname, "..", "chat.db");
@@ -24,11 +25,14 @@ const toMessage = (r: Record<string, unknown>): Message => ({
   id: Number(r.id),
   role: r.role as Message["role"],
   text: String(r.text),
+  createdAt: r.created_at ? String(r.created_at) : undefined,
 });
 
-const qAll = db.prepare("SELECT id, role, text FROM messages ORDER BY id");
-const qRecent = db.prepare("SELECT id, role, text FROM messages ORDER BY id DESC LIMIT ?");
-const qGet = db.prepare("SELECT id, role, text FROM messages WHERE id = ?");
+const qAll = db.prepare("SELECT id, role, text, created_at FROM messages ORDER BY id");
+const qRecent = db.prepare(
+  "SELECT id, role, text, created_at FROM messages ORDER BY id DESC LIMIT ?",
+);
+const qGet = db.prepare("SELECT id, role, text, created_at FROM messages WHERE id = ?");
 const qInsert = db.prepare("INSERT INTO messages (role, text) VALUES (?, ?)");
 const qUpdate = db.prepare("UPDATE messages SET text = ? WHERE id = ?");
 const qDelete = db.prepare("DELETE FROM messages WHERE id = ?");
@@ -42,15 +46,18 @@ export function recentMessages(n: number): Message[] {
   return qRecent.all(n).map(toMessage).reverse();
 }
 
-export function addPair(userText: string, assistantText: string): [Message, Message] {
+export function addPair(
+  userText: string,
+  assistantText: string,
+): [Message, Message] {
   db.exec("BEGIN");
   try {
     const u = qInsert.run("user", userText);
     const a = qInsert.run("assistant", assistantText);
     db.exec("COMMIT");
     return [
-      { id: Number(u.lastInsertRowid), role: "user", text: userText },
-      { id: Number(a.lastInsertRowid), role: "assistant", text: assistantText },
+      toMessage(qGet.get(Number(u.lastInsertRowid)) as Record<string, unknown>),
+      toMessage(qGet.get(Number(a.lastInsertRowid)) as Record<string, unknown>),
     ];
   } catch (e) {
     db.exec("ROLLBACK");
@@ -69,4 +76,96 @@ export function deleteMessage(id: number): boolean {
 
 export function clearMessages(): void {
   qClear.run();
+}
+
+// ===== ข้อมูล portfolio ของเรา (ให้บอทใช้ตอบ) =====
+db.exec(`
+  CREATE TABLE IF NOT EXISTS profile (
+    id     INTEGER PRIMARY KEY AUTOINCREMENT,
+    name   TEXT NOT NULL,
+    bio    TEXT NOT NULL,
+    skills TEXT NOT NULL
+  );
+  CREATE TABLE IF NOT EXISTS projects (
+    id          INTEGER PRIMARY KEY AUTOINCREMENT,
+    profile_id  INTEGER NOT NULL,
+    title       TEXT NOT NULL,
+    description TEXT NOT NULL,
+    tech        TEXT NOT NULL,
+    FOREIGN KEY(profile_id) REFERENCES profile(id)
+  );
+`);
+
+export interface ProfileRow {
+  name: string;
+  bio: string;
+  skills: string;
+}
+
+export interface ProjectRow {
+  title: string;
+  description: string;
+  tech: string;
+}
+
+// รวมข้อมูล portfolio จาก SQLite เป็นข้อความเดียว ไว้ใส่ใน system prompt
+export function getPortfolioContext(): string {
+  const profiles = db.prepare("SELECT id, name, bio, skills FROM profile").all() as any[];
+  if (profiles.length === 0) return "(ยังไม่มีข้อมูล portfolio)";
+
+  const lines: string[] = [];
+  for (const profile of profiles) {
+    const projects = db.prepare("SELECT title, description, tech FROM projects WHERE profile_id = ?").all(profile.id) as any[];
+    
+    lines.push(`--- นักศึกษา: ${profile.name} ---`);
+    lines.push(`ชื่อ: ${profile.name}`);
+    lines.push(`แนะนำตัว: ${profile.bio}`);
+    lines.push(`ทักษะ: ${profile.skills}`);
+    lines.push("โปรเจกต์:");
+    projects.forEach((p, i) => {
+      lines.push(`${i + 1}. ${p.title} — ${p.description} (เทคโนโลยี: ${p.tech})`);
+    });
+    lines.push("");
+  }
+  return lines.join("\n");
+}
+
+// --- 3. ฟังก์ชันบันทึกข้อมูลนักศึกษาหลายคนพร้อมกัน (ใช้ตอนรัน seed) ---
+export interface StudentData {
+  profile: { name: string; bio: string; skills: string };
+  projects: { title: string; description: string; tech: string }[];
+}
+
+export function saveAllStudents(students: StudentData[]): void {
+  db.exec("BEGIN");
+  try {
+    // ล้างข้อมูลเก่าทิ้งก่อน เพื่อใส่ชุดใหม่ที่อัปเดตแล้ว
+    db.exec("DELETE FROM projects");
+    db.exec("DELETE FROM profile");
+
+    const insertProfile = db.prepare(
+      "INSERT INTO profile (name, bio, skills) VALUES (?, ?, ?)"
+    );
+    const insertProject = db.prepare(
+      "INSERT INTO projects (profile_id, title, description, tech) VALUES (?, ?, ?, ?)"
+    );
+
+    for (const student of students) {
+      const res = insertProfile.run(
+        student.profile.name,
+        student.profile.bio,
+        student.profile.skills
+      );
+      const profileId = res.lastInsertRowid; // ดึง ID ที่เพิ่งถูกสร้างอัตโนมัติ
+
+      for (const p of student.projects) {
+        insertProject.run(profileId, p.title, p.description, p.tech);
+      }
+    }
+
+    db.exec("COMMIT");
+  } catch (e) {
+    db.exec("ROLLBACK");
+    throw e;
+  }
 }

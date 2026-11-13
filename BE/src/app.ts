@@ -1,6 +1,13 @@
 import express from "express";
+import {
+  addPair,
+  clearMessages,
+  deleteMessage,
+  listMessages,
+  recentMessages,
+  updateMessage,
+} from "./db";
 import { getReply } from "./reply";
-import { addPair, clearMessages, deleteMessage, listMessages, recentMessages, updateMessage } from "./db";
 
 try {
   process.loadEnvFile();
@@ -10,9 +17,11 @@ try {
 
 const app = express();
 
+const MAX_HISTORY = 10; // จำนวนข้อความล่าสุดที่ส่งให้ AI (ความจำ)
+
 app.use(express.json());
 
-app.get("/",(req, res) => {
+app.get("/", (req, res) => {
   res.send("Hello, World!");
 });
 
@@ -28,16 +37,26 @@ app.post("/messages", async (req, res) => {
   }
   const userText = text.trim();
 
+  // ดึงประวัติแชตล่าสุดจากฐานข้อมูล แล้วส่งไปพร้อมข้อความใหม่
+  const history = recentMessages(MAX_HISTORY).map((m) => ({
+    role: m.role,
+    content: m.text,
+  }));
+
   let replyText: string;
   try {
-    replyText = await getReply(userText);
+    replyText = await getReply(userText, history);
   } catch (err) {
     const e = err as { status?: number; message?: string };
     console.error("LLM error:", e.status ?? "-", e.message);
     if (e.status === 429) {
-      res.status(429).json({ error: "เรียก AI ถี่เกินโควตา รอสักครู่แล้วลองใหม่" });
+      res
+        .status(429)
+        .json({ error: "เรียก AI ถี่เกินโควตา รอสักครู่แล้วลองใหม่" });
     } else {
-      res.status(502).json({ error: "เรียก AI ไม่สำเร็จ ตรวจ LLM_API_KEY / LLM_MODEL ใน BE/.env" });
+      res.status(502).json({
+        error: "เรียก AI ไม่สำเร็จ ตรวจ LLM_API_KEY / LLM_MODEL ใน BE/.env",
+      });
     }
     return;
   }
