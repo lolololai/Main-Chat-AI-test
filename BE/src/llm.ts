@@ -11,7 +11,8 @@ const DEFAULT_MODEL = "gemini-3.5-flash-lite";
 let client: OpenAI | null = null;
 
 export function isLlmConfigured(): boolean {
-  return Boolean(process.env.LLM_API_KEY);
+  const key = process.env.LLM_API_KEY?.trim();
+  return Boolean(key && !key.includes("วางคีย์ของคุณตรงนี้"));
 }
 
 function getClient(): OpenAI {

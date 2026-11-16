@@ -18,14 +18,13 @@ const RULES = `# Persona
 const FALLBACK_REPLIES: string[] = [
   "รับทราบครับ!",
   "น่าสนใจมากเลย เล่าต่อได้ไหม?",
-  "ขอคิดแป๊บนึงนะ 🤔",
+  "ขอคิดแป๊บนึงนะ...",
   "เข้าใจแล้วครับ",
   "เยี่ยมเลย! มีอะไรให้ช่วยอีกไหม?",
 ];
 
 let warned = false;
 
-// system prompt = กฎ + ข้อมูล portfolio จาก SQLite (อ่านใหม่ทุกครั้ง แก้ข้อมูลแล้วบอทรู้ทันที)
 export function buildSystemPrompt(): string {
   return `${RULES}
 

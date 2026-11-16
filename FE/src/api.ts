@@ -2,7 +2,6 @@ import type { Message, ChatExchange } from './types';
 
 const TIMEOUT_MS = 5000;
 
-// รอ AI ตอบได้นานกว่าปกติ (30 วินาที)
 const SEND_TIMEOUT_MS = 30000;
 
 export async function fetchMessages(): Promise<Message[]> {
@@ -49,4 +48,14 @@ export async function deleteMessage(id: number): Promise<{ message: string }> {
   });
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
   return res.json();
+}
+
+export async function fetchServerStatus(): Promise<{ aiConfigured: boolean; model?: string }> {
+  try {
+    const res = await fetch('/status', { signal: AbortSignal.timeout(TIMEOUT_MS) });
+    if (!res.ok) return { aiConfigured: false };
+    return res.json();
+  } catch {
+    return { aiConfigured: false };
+  }
 }

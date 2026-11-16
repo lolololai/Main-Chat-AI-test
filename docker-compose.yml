@@ -1,0 +1,35 @@
+services:
+  be:
+    build:
+      context: ./BE
+    env_file:
+      - ./BE/.env          # ต้องสร้างไฟล์นี้จาก BE/.env.example ก่อนรัน
+    environment:
+      PORT: "3000"
+      DB_PATH: "/data/chat.db"   # เก็บ DB ใน volume แยก ไม่หายตอน rebuild
+    command: ["npx", "tsx", "watch", "src/app.ts"]
+    volumes:
+      - db_data:/data
+      - ./BE/src:/app/src        # mount code เพื่อให้แก้โค้ดแล้ว auto reload ทันที
+    restart: unless-stopped
+
+  fe:
+    build:
+      context: ./FE
+      dockerfile: Dockerfile.dev
+    ports:
+      - "80:5173"                # เข้าผ่าน http://localhost (port 80 ชี้ไปที่ vite dev server 5173)
+      - "5173:5173"              # หรือเข้าผ่าน http://localhost:5173 ก็ได้
+    environment:
+      VITE_BE_URL: "http://be:3000"
+    volumes:
+      - ./FE/src:/app/src        # mount โค้ด src เพื่อ Hot Module Replacement (HMR)
+      - ./FE/public:/app/public  # mount รูปภาพและ assets
+      - ./FE/index.html:/app/index.html
+      - ./FE/vite.config.ts:/app/vite.config.ts
+    depends_on:
+      - be
+    restart: unless-stopped
+
+volumes:
+  db_data:

@@ -78,7 +78,6 @@ export function clearMessages(): void {
   qClear.run();
 }
 
-// ===== ข้อมูล portfolio ของเรา (ให้บอทใช้ตอบ) =====
 db.exec(`
   CREATE TABLE IF NOT EXISTS profile (
     id     INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -108,7 +107,6 @@ export interface ProjectRow {
   tech: string;
 }
 
-// รวมข้อมูล portfolio จาก SQLite เป็นข้อความเดียว ไว้ใส่ใน system prompt
 export function getPortfolioContext(): string {
   const profiles = db.prepare("SELECT id, name, bio, skills FROM profile").all() as any[];
   if (profiles.length === 0) return "(ยังไม่มีข้อมูล portfolio)";
@@ -130,7 +128,6 @@ export function getPortfolioContext(): string {
   return lines.join("\n");
 }
 
-// --- 3. ฟังก์ชันบันทึกข้อมูลนักศึกษาหลายคนพร้อมกัน (ใช้ตอนรัน seed) ---
 export interface StudentData {
   profile: { name: string; bio: string; skills: string };
   projects: { title: string; description: string; tech: string }[];
@@ -139,7 +136,6 @@ export interface StudentData {
 export function saveAllStudents(students: StudentData[]): void {
   db.exec("BEGIN");
   try {
-    // ล้างข้อมูลเก่าทิ้งก่อน เพื่อใส่ชุดใหม่ที่อัปเดตแล้ว
     db.exec("DELETE FROM projects");
     db.exec("DELETE FROM profile");
 
@@ -156,7 +152,7 @@ export function saveAllStudents(students: StudentData[]): void {
         student.profile.bio,
         student.profile.skills
       );
-      const profileId = res.lastInsertRowid; // ดึง ID ที่เพิ่งถูกสร้างอัตโนมัติ
+      const profileId = res.lastInsertRowid;
 
       for (const p of student.projects) {
         insertProject.run(profileId, p.title, p.description, p.tech);

@@ -1,21 +1,25 @@
 # FE — Mini Chat (React + TypeScript + Vite)
 
-Frontend ของ mini chat สัปดาห์ที่ 5 (อยู่ในโครง React Basics เดิม แต่เขียนด้วย React **TypeScript** ให้สอดคล้องกับ BE) ที่**เชื่อมกับ BE จริงแล้ว** ด้วย 2 กลไกหลัก:
+Frontend ของ mini chat วิชา Web Technology สัปดาห์ที่ 9 (พัฒนาต่อยอดจากโครง React Basics สัปดาห์ที่ 5) เขียนด้วย React **TypeScript** ให้สอดคล้องกับ BE และ**เชื่อมกับ BE จริงแล้ว** ด้วย 2 กลไกหลัก:
 
 1. **REST API** — ส่ง/อ่าน/ล้างข้อความผ่าน `fetch` ไปที่ Express Chat API
 2. **Polling** — `setInterval` ถาม `GET /messages` ทุก 2 วินาที เพื่อรับข้อความใหม่แบบเกือบ real-time (วิธีง่ายสุดก่อนจะไปเรียน WebSocket)
 
 ## รัน (ต้องรัน BE ด้วย → ใช้ 2 terminal)
 
+**Terminal 1 — BE** (โฟลเดอร์ `../BE` เทียบจาก FE, http://localhost:3000):
+
 ```bash
-# Terminal 1 — BE (โฟลเดอร์ ../BE เทียบจาก FE)
 cd ../BE
 npm install
-npm run dev             # http://localhost:3000
+npm run dev
+```
 
-# Terminal 2 — FE (โฟลเดอร์ FE)
+**Terminal 2 — FE** (http://localhost:5173):
+
+```bash
 npm install
-npm run dev             # เปิด http://localhost:5173
+npm run dev
 ```
 
 ทดสอบความ real-time: เปิด browser 2 หน้า แล้วส่งข้อความในหน้านึง — อีกหน้าจะได้ข้อความใหม่ภายใน ~2 วินาทีจาก polling
@@ -24,24 +28,36 @@ npm run dev             # เปิด http://localhost:5173
 
 ```
 FE/
-├── vite.config.ts              ← proxy /messages → localhost:3000 (แก้ปัญหา CORS ตอน dev)
+├── vite.config.ts              ← proxy /messages, /status → localhost:3000 (แก้ CORS ตอน dev)
 ├── tsconfig.json               ← React + TS (strict เหมือนฝั่ง BE)
 ├── index.html
+├── public/
+│   ├── profiles/               ← avatar สมาชิก
+│   ├── mockup/                 ← ภาพตัวอย่างผลงาน
+│   └── models/Fox.glb          ← โมเดล 3D ตัวอย่าง
 └── src/
     ├── main.tsx                ← จุดเริ่ม render (StrictMode)
-    ├── types.ts                ← interface Message — "สัญญา" ชุดเดียวกับฝั่ง BE
-    ├── App.tsx                 ← state messages + Effect (โหลด + polling) + handlers
+    ├── types.ts                ← interface Message / Artwork / Member
+    ├── App.tsx                 ← routing ตาม pathname + modals
     ├── api.ts                  ← fetch ทั้งหมดไว้ที่เดียว (GET / POST / DELETE /messages)
     ├── index.css
+    ├── data/members.ts         ← ข้อมูลสมาชิก + ผลงาน (field modelUrl อยู่ตรงนี้)
+    ├── pages/
+    │   ├── chat.tsx            ← หน้า CHAT AI
+    │   └── MembersPage.tsx     ← ทำเนียบสมาชิก + ผลงาน
     └── components/
-        ├── MessageBubble.tsx   ← props message { id, role, text } (Lab 1–2)
-        ├── ChatLog.tsx         ← map + key + empty state + auto-scroll Effect (Lab 4, 8, 9)
-        └── Composer.tsx        ← controlled input + preventDefault + disabled (Lab 5–7)
+        ├── ChatLog.tsx         ← map + key + empty state + auto-scroll Effect
+        ├── MessageBubble.tsx   ← bubble + artwork gallery + แก้ไข/ลบข้อความ
+        ├── Composer.tsx        ← controlled input + preventDefault + disabled
+        ├── ArtworkCard.tsx     ← การ์ดผลงาน
+        ├── MemberModal.tsx     ← แฟ้มผลงานของสมาชิก
+        ├── ImageModal.tsx      ← Lightbox + สลับ 3D/2D (lazy-load ThreeView)
+        └── ThreeView.tsx       ← viewer Three.js (GLTFLoader + OrbitControls)
 ```
 
 ```bash
-npm run typecheck   # เช็ค TypeScript ฝั่ง FE (แยกจากฝั่ง BE)
-npm run build       # build จริงด้วย Vite
+npm run typecheck
+npm run build
 ```
 
 | ใน React Basics (สัปดาห์ 5) | ใน FE นี้ (integration) |
@@ -58,6 +74,30 @@ npm run build       # build จริงด้วย Vite
 - **Polling Effect ใน `App.tsx`** — `refresh()` ตอน mount + `setInterval` + `clearInterval` ใน cleanup (เขียน cleanup ไม่ครบ = timer ค้างและโดน request ยัดถล่ม)
 - **Error state** — fetch พัง (เช่นลืมรัน BE) → แสดงแถบแดงแทนหน้าขาว
 - **Vite proxy** — FE ยิงไป `/messages` (relative path) แล้ว Vite ส่งต่อไป `localhost:3000` ให้ → คนละ port แต่ไม่ติด CORS (เรื่อง CORS ลึก ๆ เรียนในสัปดาห์บูรณาการ)
+
+## โมดูลแสดงผล 3D (Three.js + GLTFLoader)
+
+ผลงานประเภท `category: "3d"` จะเปิด Lightbox ที่มีตัวแสดงผล 3D ของจริง:
+
+- `src/components/ThreeView.tsx` — สร้าง Scene/Camera/Renderer, ใช้ `OrbitControls` หมุน/ซูม (เมาส์ + ทัช), `GLTFLoader` โหลดไฟล์ `.glb` / `.gltf`, `RoomEnvironment` ทำให้วัสดุ PBR ไม่มืด, ปรับขนาดโมเดลให้พอดีฉากอัตโนมัติ และเล่นอนิเมชันแรกของโมเดล
+- ปุ่ม **นำเข้าโมเดล** ในแถบเครื่องมือเลือกไฟล์ `.glb` / `.gltf` จากเครื่องได้เลย (ใช้ `URL.createObjectURL` และคืน URL ตอนเลิกใช้)
+- ถ้าโหลดไม่สำเร็จ จะแสดงแถบแจ้งเตือน + ปุ่ม "ลองใหม่" และสลับไปแสดง geometry พื้นฐานแทน
+- ไฟล์โมเดลตัวอย่างอยู่ที่ `public/models/Fox.glb` และถูกอ้างอิงจาก `modelUrl` ใน `src/data/members.ts` (ผลงาน "Animated Fox 3D (GLTF)")
+- three.js ถูกโหลดแบบ lazy (`React.lazy` + `Suspense`) ตอนเปิดผลงาน 3D จึงไม่ไปเพิ่มขนาด bundle หน้าแชท
+
+เพิ่มผลงาน 3D ของตัวเองได้โดยใส่ field ลงใน `Artwork`:
+
+```ts
+{
+  id: 'art-09',
+  category: '3d',
+  title: 'My Model',
+  modelUrl: '/models/my-model.glb',
+  model3dType: 'cyber-cube'
+}
+```
+
+**เครดิตไฟล์ตัวอย่าง:** `Fox.glb` จาก [Khronos glTF Sample Assets](https://github.com/KhronosGroup/glTF-Sample-Assets/tree/main/Models/Fox) — model © PixelMannen (CC0), rigging & animation © tomkranis (CC BY 4.0), glTF conversion © AsoboStudio & scurest (CC BY 4.0)
 
 ## ต่อยอด (ถ้าเสร็จเร็ว)
 

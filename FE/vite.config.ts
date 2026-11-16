@@ -4,9 +4,20 @@ import react from '@vitejs/plugin-react';
 export default defineConfig({
   plugins: [react()],
   server: {
+    host: '0.0.0.0',
     port: 5173,
+    watch: {
+      usePolling: true,
+    },
     proxy: {
-      '/messages': 'http://localhost:3000',
+      '/messages': {
+        target: process.env.VITE_BE_URL || 'http://localhost:3000',
+        changeOrigin: true,
+      },
+      '/status': {
+        target: process.env.VITE_BE_URL || 'http://localhost:3000',
+        changeOrigin: true,
+      },
     },
   },
 });

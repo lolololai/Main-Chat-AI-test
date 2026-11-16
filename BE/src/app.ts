@@ -8,21 +8,28 @@ import {
   updateMessage,
 } from "./db";
 import { getReply } from "./reply";
+import { isLlmConfigured } from "./llm";
 
 try {
   process.loadEnvFile();
 } catch {
-  // ไม่มีไฟล์ .env ก็ไม่เป็นไร
 }
 
 const app = express();
 
-const MAX_HISTORY = 10; // จำนวนข้อความล่าสุดที่ส่งให้ AI (ความจำ)
+const MAX_HISTORY = 10;
 
 app.use(express.json());
 
 app.get("/", (req, res) => {
   res.send("Hello, World!");
+});
+
+app.get("/status", (req, res) => {
+  res.json({
+    aiConfigured: isLlmConfigured(),
+    model: process.env.LLM_MODEL || "gemini-3.5-flash-lite",
+  });
 });
 
 app.get("/messages", (req, res) => {
@@ -37,7 +44,6 @@ app.post("/messages", async (req, res) => {
   }
   const userText = text.trim();
 
-  // ดึงประวัติแชตล่าสุดจากฐานข้อมูล แล้วส่งไปพร้อมข้อความใหม่
   const history = recentMessages(MAX_HISTORY).map((m) => ({
     role: m.role,
     content: m.text,
