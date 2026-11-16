@@ -3,6 +3,7 @@ import ChatLog from "../components/ChatLog";
 import Composer from "../components/Composer";
 import MemberModal from "../components/MemberModal";
 import ImageModal from "../components/ImageModal";
+import SiteNavbar from "../components/SiteNavbar";
 import { fetchMessages, sendMessage, clearMessages, updateMessage, deleteMessage, fetchServerStatus } from "../api";
 import { MEMBERS, ALL_ARTWORKS } from "../data/members";
 import type { Message, Artwork, Member } from "../types";
@@ -161,90 +162,35 @@ export default function ChatPage() {
     window.dispatchEvent(new PopStateEvent("popstate"));
   };
 
+  const goToSection = (hash: string) => {
+    window.history.pushState({}, "", `/${hash}`);
+    window.dispatchEvent(new PopStateEvent("popstate"));
+    window.setTimeout(() => {
+      document.querySelector(hash)?.scrollIntoView({ behavior: "smooth" });
+    }, 80);
+  };
+
   return (
     <div className="pro-app-window">
-      {/* ── TOP HEADER (Enterprise Bar) ── */}
-      <header className="pro-header">
-        {/* Left Branding */}
-        <div className="pro-brand-zone">
-          <div className="pro-logo-badge">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-            </svg>
-          </div>
-          <div className="pro-brand-info">
-            <div className="brand-title-row">
-              <span className="brand-name">LINUX CHAT AI</span>
-            </div>
-            <span className="brand-sub">Portfolio Smart Chat</span>
-          </div>
-        </div>
+      <div className="design-scope site-navbar">
+        <SiteNavbar
+          onNavigateChat={() => navigateTo("/chat")}
+          onNavigateSection={goToSection}
+          showChatButton={false}
+          showNavLinks={false}
+        />
+      </div>
 
-        {/* Center Navigation Tabs */}
-        <nav className="pro-nav-tabs">
-          <button className="pro-nav-link" onClick={() => navigateTo("/")}>
-            หน้าหลัก
-          </button>
-          <button className="pro-nav-link" onClick={() => navigateTo("/about")}>
-            แนะนำกลุ่ม
-          </button>
-          <button className="pro-nav-link" onClick={() => navigateTo("/members")}>
-            สมาชิก
-          </button>
-          <button className="pro-nav-link active" onClick={() => navigateTo("/chat")}>
-            CHAT AI
-            <span className="status-dot dot-green" />
-          </button>
-        </nav>
-
-        {/* Right Status & Controls */}
-        <div className="pro-header-right">
-          
-
-          <div className="window-controls-group">
-            <button className="win-btn" title="ย่อ" aria-label="ย่อ">
-              <svg width="10" height="10" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
-                <line x1="5" y1="12" x2="19" y2="12"/>
-              </svg>
-            </button>
-            <button className="win-btn" title="ขยาย" aria-label="ขยาย">
-              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
-              </svg>
-            </button>
-            <button className="win-btn btn-close-x" onClick={() => navigateTo("/")} title="ปิด" aria-label="ปิด">
-              <svg width="11" height="11" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
-                <line x1="18" y1="6" x2="6" y2="18"/>
-                <line x1="6" y1="6" x2="18" y2="18"/>
-              </svg>
-            </button>
-          </div>
-
-          {/* Mobile Menu Toggle */}
-          <button
-            className="mobile-drawer-toggle"
-            onClick={() => setShowMobileSidebar(!showMobileSidebar)}
-            aria-label="เปิดเมนูแถบข้าง"
-          >
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <line x1="3" y1="12" x2="21" y2="12"/>
-              <line x1="3" y1="6" x2="21" y2="6"/>
-              <line x1="3" y1="18" x2="21" y2="18"/>
-            </svg>
-          </button>
-        </div>
-      </header>
-
-      {/* ── MAIN WORKSPACE BODY ── */}
+      
       <div className="pro-workspace-body">
-        {/* Mobile Backdrop */}
+        
         {showMobileSidebar && (
           <div className="pro-mobile-backdrop" onClick={() => setShowMobileSidebar(false)} />
         )}
 
-        {/* ── LEFT SIDEBAR (Controls & Prompt Templates) ── */}
+        
         <aside className={`pro-sidebar ${showMobileSidebar ? "drawer-open" : ""}`}>
-          {/* Mobile Drawer Close Button */}
+          
           <div className="mobile-sidebar-close-bar">
             <span className="drawer-title">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -265,7 +211,7 @@ export default function ChatPage() {
             </button>
           </div>
 
-          {/* Card 1: Active Agent */}
+          
           <div className="pro-sidebar-card">
             <div className="card-top-status">
               <span className="card-label">ACTIVE AGENT</span>
@@ -282,28 +228,10 @@ export default function ChatPage() {
               )}
             </div>
 
-            {/* <div className="agent-profile-row">
-              <div className="agent-icon-box">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                </svg>
-                <span className="check-verified">
-                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
-                    <polyline points="20 6 9 17 4 12"/>
-                  </svg>
-                </span>
-              </div>
-              <div className="agent-info">
-                <h4>AI Creative Assistant</h4>
-                <div className="agent-tag-pills">
-                  <span className="tag-pill tag-pink"></span>
-                  <span className="tag-pill tag-blue"></span>
-                </div>
-              </div>
-            </div> */}
+            
           </div>
 
-          {/* Card 2: Quick Prompt Templates */}
+          
           <div className="pro-sidebar-card templates-card">
             <div className="card-top-status">
               <div className="template-title-left">
@@ -381,7 +309,7 @@ export default function ChatPage() {
             </div>
           </div>
 
-          {/* Quick Member Switcher */}
+          
           <div className="pro-sidebar-card directory-card">
             <span className="card-label">MEMBERS DIRECTORY</span>
             <div className="directory-list">
@@ -416,7 +344,7 @@ export default function ChatPage() {
             )}
           </div>
 
-          {/* Sidebar Bottom Tags */}
+          
           <div className="pro-sidebar-bottom-tags">
             <div className="preset-pill">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
@@ -431,7 +359,7 @@ export default function ChatPage() {
           </div>
         </aside>
 
-        {/* ── RIGHT CHAT & WORKSPACE AREA ── */}
+        
         <main className="pro-chat-main">
           {error && (
             <div className="pro-error-banner" role="alert">
@@ -444,7 +372,7 @@ export default function ChatPage() {
             </div>
           )}
 
-          {/* Confirm Clear Modal */}
+          
           {showClearConfirm && (
             <div className="pro-modal-overlay">
               <div className="pro-confirm-dialog">
@@ -462,7 +390,7 @@ export default function ChatPage() {
             </div>
           )}
 
-          {/* Chat Messages Log */}
+          
           <ChatLog
             messages={messages}
             pendingText={pendingText}
@@ -472,7 +400,7 @@ export default function ChatPage() {
             onOpenImageModal={setSelectedArtwork}
           />
 
-          {/* Composer Input Box */}
+          
           <Composer
             onSend={handleSend}
             disabled={sending}
@@ -481,7 +409,7 @@ export default function ChatPage() {
         </main>
       </div>
 
-      {/* ── BOTTOM STATUS BAR ── */}
+      
       <footer className="pro-footer-statusbar">
         <div className="status-item-left">
           <span className="status-dot dot-green" />
@@ -496,7 +424,7 @@ export default function ChatPage() {
         </div>
       </footer>
 
-      {/* ── MODALS (Member Profile & Image Lightbox) ── */}
+      
       <MemberModal
         member={selectedMember}
         onClose={() => setSelectedMember(null)}

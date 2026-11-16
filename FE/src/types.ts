@@ -24,7 +24,7 @@ export interface Artwork {
   likes?: number;
   category?: WorkCategory;
   model3dType?: 'cyber-cube' | 'retro-torus' | 'crystal-sphere' | 'game-asset';
-  /** path ไฟล์โมเดล 3D จริง (.glb / .gltf) ที่ GLTFLoader จะโหลดมาแสดง */
+  
   modelUrl?: string;
 }
 

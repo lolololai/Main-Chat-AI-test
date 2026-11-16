@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import SiteNavbar from "./SiteNavbar";
 import "../homeLanding.css";
 
 interface MemberCardData {
@@ -19,7 +20,7 @@ const MEMBERS: MemberCardData[] = [
   {
     name: "พงศกร เจิมเจิดพล",
     role: "Front-end",
-    photo: "images/member_portrait_one_1794740320754.jpg",
+    photo: "profiles/icon_profile01.png",
     skills: ["Tailwind.css", "React", "TypeScript", "NextJS"],
     work: "ดูแลส่วน Front-end ของโปรเจกต์ Chat AI พร้อม Portfolio ของกลุ่ม linux",
     email: "pongsakorn.jerm@bumail.net",
@@ -202,30 +203,8 @@ export default function HomeLanding({ onNavigateChat }: HomeLandingProps) {
   }, []);
 
   return (
-    <div className="home-landing">
-      <header className="topbar">
-        <div className="topbar-inner">
-          <a href="#hero" className="logo">Linux</a>
-
-          <nav className="main-nav" aria-label="หลัก">
-            <a href="#hero">HOME</a>
-            <a href="#project-details">TEAM</a>
-            <a href="#members">MEMBERS</a>
-            <a href="#contact">CONTACT</a>
-          </nav>
-
-          <a
-            href="/chat"
-            className="pill-btn"
-            onClick={(event) => {
-              event.preventDefault();
-              onNavigateChat();
-            }}
-          >
-            CHAT AI
-          </a>
-        </div>
-      </header>
+    <div className="home-landing design-scope">
+      <SiteNavbar onNavigateChat={onNavigateChat} />
 
       <main>
         <section id="hero" className="hero">

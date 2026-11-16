@@ -1,32 +1,28 @@
-/* ==========================================================
-   Linux Group — Pastel Landing Page (CSS ล้วน)
-   สารบัญ: 1.พื้นฐาน 2.แถบเมนู 3.Hero 4.รายละเอียด
-           5.สมาชิก 6.ติดต่อ 7.ส่วนท้าย
-   ========================================================== */
 
-/* ---------- 1) พื้นฐาน ---------- */
-.home-landing {
+
+
+.design-scope {
   --font-display: "Bricolage Grotesque", "Noto Sans Thai", system-ui, sans-serif;
   --font-sans: "DM Sans", "Noto Sans Thai", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
 
-  --ink: #1f1c18; /* สีตัวอักษรหลัก */
+  --ink: #1f1c18; 
 }
 
-.home-landing, .home-landing *,
-.home-landing *::before,
-.home-landing *::after {
+.design-scope, .design-scope *,
+.design-scope *::before,
+.design-scope *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
   border: 0 solid;
 }
 
-.home-landing [hidden] {
+.design-scope [hidden] {
   display: none !important;
 }
 
-html:has(.home-landing) {
+html:has(body.landing-mode) {
   line-height: 1.5;
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
@@ -38,42 +34,42 @@ body.landing-mode {
   color: var(--ink);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* พื้นหลังจุดสีครีม */
+  
   background-color: #fbf7f0;
   background-image: radial-gradient(#dfd6c7 1.25px, transparent 1.25px);
   background-size: 24px 24px;
 }
 
-.home-landing a {
+.design-scope a {
   color: inherit;
   text-decoration: inherit;
 }
 
-.home-landing button,
-.home-landing input,
-.home-landing textarea {
+.design-scope button,
+.design-scope input,
+.design-scope textarea {
   font: inherit;
   color: inherit;
   letter-spacing: inherit;
   background: transparent;
 }
 
-.home-landing button {
+.design-scope button {
   cursor: pointer;
 }
 
-.home-landing img,
-.home-landing svg {
+.design-scope img,
+.design-scope svg {
   display: block;
   max-width: 100%;
 }
 
-.home-landing img {
+.design-scope img {
   height: auto;
 }
 
-/* ไอคอนเส้น (ใช้กับ svg ทุกอัน) */
-.home-landing .icon {
+
+.design-scope .icon {
   width: 0.875rem;
   height: 0.875rem;
   flex-shrink: 0;
@@ -84,17 +80,17 @@ body.landing-mode {
   stroke-linejoin: round;
 }
 
-.home-landing .icon-lg {
+.design-scope .icon-lg {
   width: 1.25rem;
   height: 1.25rem;
 }
 
-.home-landing .icon-check {
+.design-scope .icon-check {
   color: #275a3a;
 }
 
-/* หัวข้อ section ที่ใช้ซ้ำ */
-.home-landing .section-title {
+
+.design-scope .section-title {
   font-family: var(--font-display);
   font-size: 1.875rem;
   line-height: 2.25rem;
@@ -104,8 +100,8 @@ body.landing-mode {
   text-wrap: balance;
 }
 
-/* ปุ่มกลมสีชมพูอ่อน (ใช้ซ้ำ) */
-.home-landing .pill-btn {
+
+.design-scope .pill-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -122,18 +118,18 @@ body.landing-mode {
   transition: background-color 150ms;
 }
 
-.home-landing .pill-btn:hover {
+.design-scope .pill-btn:hover {
   background: #f5b0c7;
 }
 
-.home-landing a:focus-visible,
-.home-landing button:focus-visible {
+.design-scope a:focus-visible,
+.design-scope button:focus-visible {
   outline: 2px solid var(--ink);
   outline-offset: 2px;
 }
 
-/* ---------- 2) แถบเมนูด้านบน ---------- */
-.home-landing .topbar {
+
+.design-scope .topbar {
   position: sticky;
   top: 0;
   z-index: 30;
@@ -143,7 +139,7 @@ body.landing-mode {
   backdrop-filter: blur(8px);
 }
 
-.home-landing .topbar-inner {
+.design-scope .topbar-inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -153,7 +149,7 @@ body.landing-mode {
   padding: 0.875rem 1rem;
 }
 
-.home-landing .logo {
+.design-scope .logo {
   flex-shrink: 0;
   font-family: var(--font-display);
   font-size: 1.25rem;
@@ -163,8 +159,8 @@ body.landing-mode {
   white-space: nowrap;
 }
 
-.home-landing .main-nav {
-  display: none; /* ซ่อนในมือถือ แสดงตั้งแต่ 768px */
+.design-scope .main-nav {
+  display: none; 
   align-items: center;
   gap: 1.5rem;
   font-size: 0.875rem;
@@ -173,32 +169,32 @@ body.landing-mode {
   color: #5c5349;
 }
 
-.home-landing .main-nav a {
+.design-scope .main-nav a {
   flex-shrink: 0;
   white-space: nowrap;
   transition: color 150ms;
 }
 
-.home-landing .main-nav a:hover {
+.design-scope .main-nav a:hover {
   color: var(--ink);
 }
 
-/* ---------- 3) Hero (แฟ้มเอกสาร) ---------- */
-.home-landing .hero {
+
+.design-scope .hero {
   width: 100%;
   max-width: 64rem;
   margin: 0 auto;
   padding: 2rem 1rem 3rem;
 }
 
-.home-landing .folder-tabs {
+.design-scope .folder-tabs {
   display: flex;
   align-items: flex-end;
   gap: 0.375rem;
   padding-left: 1.5rem;
 }
 
-.home-landing .tab {
+.design-scope .tab {
   height: 1.5rem;
   padding: 0.25rem 1rem;
   border: 1px solid rgba(31, 28, 24, 0.15);
@@ -209,25 +205,25 @@ body.landing-mode {
   font-weight: 500;
 }
 
-.home-landing .tab-pink {
-  height: 1.75rem; /* แท็บแรกสูงกว่าเล็กน้อย */
+.design-scope .tab-pink {
+  height: 1.75rem; 
   border-color: rgba(31, 28, 24, 0.18);
   background: #f8c2d4;
   color: #4d2434;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
 }
 
-.home-landing .tab-purple {
+.design-scope .tab-purple {
   background: #d9cef5;
   color: #3d315b;
 }
 
-.home-landing .tab-green {
+.design-scope .tab-green {
   background: #c4e3d0;
   color: #274b36;
 }
 
-.home-landing .binder {
+.design-scope .binder {
   position: relative;
   overflow: hidden;
   padding: 3.5rem 1.5rem;
@@ -237,8 +233,8 @@ body.landing-mode {
   box-shadow: 0 14px 34px -18px rgba(31, 28, 24, 0.22);
 }
 
-/* แถบสีขอบขวา (ซ่อนในมือถือ) */
-.home-landing .edge {
+
+.design-scope .edge {
   display: none;
   position: absolute;
   right: 0;
@@ -247,26 +243,26 @@ body.landing-mode {
   pointer-events: none;
 }
 
-.home-landing .edge-pink {
+.design-scope .edge-pink {
   top: 2rem;
   height: 5rem;
   background: rgba(245, 168, 194, 0.8);
 }
 
-.home-landing .edge-purple {
+.design-scope .edge-purple {
   top: 8rem;
   height: 6rem;
   background: rgba(203, 189, 240, 0.85);
 }
 
-.home-landing .edge-green {
+.design-scope .edge-green {
   bottom: 2.5rem;
   height: 4rem;
   background: rgba(185, 222, 200, 0.85);
 }
 
-/* รูเจาะกระดาษด้านซ้าย (ซ่อนในมือถือ) */
-.home-landing .punch-holes {
+
+.design-scope .punch-holes {
   display: none;
   position: absolute;
   top: 0;
@@ -278,7 +274,7 @@ body.landing-mode {
   pointer-events: none;
 }
 
-.home-landing .hole {
+.design-scope .hole {
   width: 0.875rem;
   height: 0.875rem;
   border: 1px solid rgba(31, 28, 24, 0.2);
@@ -287,8 +283,8 @@ body.landing-mode {
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
-/* จุดฮาล์ฟโทนสีเหลืองด้านหลังชื่อ */
-.home-landing .halftone-dots {
+
+.design-scope .halftone-dots {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -302,13 +298,13 @@ body.landing-mode {
   background-size: 11px 11px;
 }
 
-/* ดาวสติกเกอร์ */
-.home-landing .star {
+
+.design-scope .star {
   position: absolute;
   pointer-events: none;
 }
 
-.home-landing .star-pink {
+.design-scope .star-pink {
   top: 2rem;
   left: 3rem;
   width: 2.75rem;
@@ -317,7 +313,7 @@ body.landing-mode {
   color: #f7a3c0;
 }
 
-.home-landing .star-yellow {
+.design-scope .star-yellow {
   right: 2.5rem;
   bottom: 2rem;
   width: 3rem;
@@ -326,7 +322,7 @@ body.landing-mode {
   color: #fce36d;
 }
 
-.home-landing .hero-content {
+.design-scope .hero-content {
   position: relative;
   z-index: 10;
   display: flex;
@@ -335,7 +331,7 @@ body.landing-mode {
   text-align: center;
 }
 
-.home-landing .hero-content h1 {
+.design-scope .hero-content h1 {
   font-family: var(--font-display);
   font-size: 3.75rem;
   line-height: 1;
@@ -344,7 +340,7 @@ body.landing-mode {
   text-wrap: balance;
 }
 
-.home-landing .hero-subtitle {
+.design-scope .hero-subtitle {
   max-width: 36rem;
   margin-top: 0.75rem;
   font-size: 0.875rem;
@@ -353,7 +349,7 @@ body.landing-mode {
   color: #524a3e;
 }
 
-.home-landing .hero-actions {
+.design-scope .hero-actions {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -361,7 +357,7 @@ body.landing-mode {
   margin-top: 2rem;
 }
 
-.home-landing .chat-btn {
+.design-scope .chat-btn {
   flex-shrink: 0;
   min-width: 9rem;
   min-height: 2.75rem;
@@ -378,21 +374,21 @@ body.landing-mode {
   transition: transform 150ms ease-out;
 }
 
-.home-landing .chat-btn:hover {
+.design-scope .chat-btn:hover {
   transform: translateY(-2px);
   background: #f9b7d0;
 }
 
-.home-landing .chat-btn:active {
+.design-scope .chat-btn:active {
   transform: translateY(2px);
   box-shadow: none;
 }
 
-.home-landing .chat-btn:focus-visible {
+.design-scope .chat-btn:focus-visible {
   outline-offset: 4px;
 }
 
-.home-landing .chat-notice {
+.design-scope .chat-notice {
   padding: 0.5rem 1rem;
   border: 1px solid rgba(31, 28, 24, 0.12);
   border-radius: 0.5rem;
@@ -403,15 +399,15 @@ body.landing-mode {
   color: #4b443b;
 }
 
-/* ---------- 4) รายละเอียดโปรเจกต์ ---------- */
-.home-landing .details {
+
+.design-scope .details {
   width: 100%;
   max-width: 64rem;
   margin: 0 auto;
   padding: 2.5rem 1rem;
 }
 
-.home-landing .details-card {
+.design-scope .details-card {
   padding: 1.5rem;
   border: 1px solid rgba(31, 28, 24, 0.12);
   border-radius: 1.5rem;
@@ -419,7 +415,7 @@ body.landing-mode {
   box-shadow: 0 8px 28px -16px rgba(31, 28, 24, 0.12);
 }
 
-.home-landing .details-head {
+.design-scope .details-head {
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -427,11 +423,11 @@ body.landing-mode {
   border-bottom: 1px solid rgba(31, 28, 24, 0.1);
 }
 
-.home-landing .details-head-text {
+.design-scope .details-head-text {
   max-width: 42rem;
 }
 
-.home-landing .meta {
+.design-scope .meta {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -442,11 +438,11 @@ body.landing-mode {
   color: #6b6257;
 }
 
-.home-landing .details-head .section-title {
+.design-scope .details-head .section-title {
   margin-top: 0.5rem;
 }
 
-.home-landing .details-heading {
+.design-scope .details-heading {
   margin-top: 0.375rem;
   font-size: 1rem;
   line-height: 1.5rem;
@@ -454,14 +450,14 @@ body.landing-mode {
   color: #4e463d;
 }
 
-.home-landing .details-summary {
+.design-scope .details-summary {
   max-width: 48rem;
   margin-top: 1.5rem;
   line-height: 1.625;
   color: #3e3831;
 }
 
-.home-landing .pillars {
+.design-scope .pillars {
   display: grid;
   grid-template-columns: 1fr;
   gap: 1.5rem;
@@ -470,13 +466,13 @@ body.landing-mode {
   border-top: 1px solid rgba(31, 28, 24, 0.1);
 }
 
-.home-landing .pillar {
+.design-scope .pillar {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
 }
 
-.home-landing .pillar-index {
+.design-scope .pillar-index {
   font-family: var(--font-mono);
   font-size: 0.75rem;
   line-height: 1rem;
@@ -485,82 +481,82 @@ body.landing-mode {
   color: #7a7065;
 }
 
-.home-landing .pillar h3 {
+.design-scope .pillar h3 {
   font-size: 1.125rem;
   line-height: 1.75rem;
   font-weight: 600;
 }
 
-.home-landing .pillar p {
+.design-scope .pillar p {
   font-size: 0.875rem;
   line-height: 1.625;
   color: #585046;
 }
 
-/* ---------- 5) สมาชิก (การ์ดห้อยสายคล้อง) ---------- */
-.home-landing .members {
+
+.design-scope .members {
   width: 100%;
   max-width: 80rem;
   margin: 0 auto;
   padding: 3rem 1rem;
 }
 
-.home-landing .members-head {
+.design-scope .members-head {
   text-align: center;
 }
 
-.home-landing .members-head p {
+.design-scope .members-head p {
   margin-top: 0.5rem;
   font-size: 0.875rem;
   line-height: 1.25rem;
   color: #5c5349;
 }
 
-.home-landing .rail {
+.design-scope .rail {
   position: relative;
   margin-top: 2rem;
   border-top: 1px solid rgba(31, 28, 24, 0.18);
 }
 
-.home-landing .members-grid {
+.design-scope .members-grid {
   display: grid;
   grid-template-columns: 1fr;
   justify-items: center;
   gap: 2.5rem 1rem;
 }
 
-.home-landing .member-cell {
+.design-scope .member-cell {
   display: flex;
   justify-content: center;
   width: 100%;
 }
 
-.home-landing .member {
+.design-scope .member {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%; /* ให้การ์ดกว้างเต็ม 244px ตามที่กำหนดไว้ (ถ้าไม่มีบรรทัดนี้การ์ดจะบีบเหลือแคบ) */
+  width: 100%; 
 }
 
-/* สายคล้อง + ตัวหนีบโลหะ */
-.home-landing .strap-wrap {
+
+.design-scope .strap-wrap {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.home-landing .strap {
+.design-scope .strap {
   width: 1.75rem;
   height: 4rem;
   border-left: 1px solid rgba(31, 28, 24, 0.1);
   border-right: 1px solid rgba(31, 28, 24, 0.1);
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
-  /* ลายทอผ้า (สีพื้นกำหนดจาก script.js) */
+  
   background-image: repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.22) 0, rgba(255, 255, 255, 0.22) 2px, transparent 2px, transparent 5px),
     repeating-linear-gradient(-45deg, rgba(0, 0, 0, 0.05) 0, rgba(0, 0, 0, 0.05) 2px, transparent 2px, transparent 5px);
 }
 
-.home-landing .clasp {
+.design-scope .clasp {
   position: relative;
   z-index: 10;
   display: flex;
@@ -569,7 +565,7 @@ body.landing-mode {
   margin-top: -0.25rem;
 }
 
-.home-landing .clasp-top {
+.design-scope .clasp-top {
   width: 2rem;
   height: 0.625rem;
   border: 1px solid rgba(31, 28, 24, 0.25);
@@ -578,7 +574,7 @@ body.landing-mode {
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
-.home-landing .clasp-bottom {
+.design-scope .clasp-bottom {
   width: 1rem;
   height: 1.25rem;
   border: 1px solid rgba(31, 28, 24, 0.25);
@@ -588,8 +584,8 @@ body.landing-mode {
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
-/* ตัวการ์ด (ปุ่มกดเพื่อพลิก) */
-.home-landing .card {
+
+.design-scope .card {
   position: relative;
   width: 100%;
   max-width: 244px;
@@ -600,28 +596,28 @@ body.landing-mode {
   perspective: 1200px;
 }
 
-.home-landing .card:focus-visible {
+.design-scope .card:focus-visible {
   outline-offset: 4px;
 }
 
-.home-landing .card-inner {
+.design-scope .card-inner {
   position: relative;
   width: 100%;
   height: 100%;
   transform-style: preserve-3d;
-  /* ใช้ transition แทน spring เดิม ให้เด้งเล็กน้อยตอนพลิก */
+  
   transition: transform 600ms cubic-bezier(0.34, 1.3, 0.5, 1), translate 150ms ease-out;
 }
 
-.home-landing .card:hover .card-inner {
+.design-scope .card:hover .card-inner {
   translate: 0 -4px;
 }
 
-.home-landing .card.flipped .card-inner {
+.design-scope .card.flipped .card-inner {
   transform: rotateY(180deg);
 }
 
-.home-landing .face {
+.design-scope .face {
   position: absolute;
   inset: 0;
   display: flex;
@@ -634,17 +630,17 @@ body.landing-mode {
   -webkit-backface-visibility: hidden;
 }
 
-.home-landing .face-front {
+.design-scope .face-front {
   padding: 0.875rem;
   background: #fff;
 }
 
-.home-landing .face-back {
+.design-scope .face-back {
   padding: 1rem;
   transform: rotateY(180deg);
 }
 
-.home-landing .slot {
+.design-scope .slot {
   width: 2.5rem;
   height: 0.5rem;
   margin: 0 auto 0.625rem;
@@ -653,8 +649,8 @@ body.landing-mode {
   background: #fbf7f0;
 }
 
-/* ด้านหน้า */
-.home-landing .portrait {
+
+.design-scope .portrait {
   position: relative;
   width: 100%;
   aspect-ratio: 1;
@@ -663,14 +659,14 @@ body.landing-mode {
   border-radius: 0.75rem;
 }
 
-.home-landing .portrait img {
+.design-scope .portrait img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: top;
 }
 
-.home-landing .portrait-fallback {
+.design-scope .portrait-fallback {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -684,32 +680,32 @@ body.landing-mode {
   font-weight: 500;
 }
 
-.home-landing .portrait-fallback strong {
+.design-scope .portrait-fallback strong {
   font-family: var(--font-display);
   font-size: 1.875rem;
   line-height: 2.25rem;
   font-weight: 700;
 }
 
-.home-landing .identity {
+.design-scope .identity {
   margin-top: 0.75rem;
   text-align: center;
 }
 
-.home-landing .truncate {
+.design-scope .truncate {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.home-landing .identity h3 {
+.design-scope .identity h3 {
   font-family: var(--font-display);
   font-size: 1rem;
   line-height: 1.5rem;
   font-weight: 700;
 }
 
-.home-landing .handle {
+.design-scope .handle {
   display: inline-block;
   max-width: 100%;
   margin-top: 0.25rem;
@@ -719,7 +715,7 @@ body.landing-mode {
   font-weight: 600;
 }
 
-.home-landing .role {
+.design-scope .role {
   margin-top: 0.375rem;
   font-size: 0.75rem;
   line-height: 1rem;
@@ -727,7 +723,7 @@ body.landing-mode {
   color: #5c5349;
 }
 
-.home-landing .barcode-area {
+.design-scope .barcode-area {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -736,62 +732,62 @@ body.landing-mode {
   border-top: 1px solid rgba(31, 28, 24, 0.08);
 }
 
-.home-landing .barcode {
+.design-scope .barcode {
   display: flex;
   align-items: stretch;
   gap: 1.5px;
   height: 1.25rem;
 }
 
-.home-landing .barcode span {
+.design-scope .barcode span {
   background: rgba(31, 28, 24, 0.85);
 }
 
-.home-landing .code {
+.design-scope .code {
   font-family: var(--font-mono);
   font-size: 10px;
   font-variant-numeric: tabular-nums;
   color: #6b6257;
 }
 
-.home-landing .barcode-area .code {
+.design-scope .barcode-area .code {
   margin-top: 0.25rem;
   letter-spacing: 0.1em;
 }
 
-/* ด้านหลัง */
-.home-landing .back-head {
+
+.design-scope .back-head {
   padding-bottom: 0.625rem;
   border-bottom: 1px solid rgba(31, 28, 24, 0.1);
 }
 
-.home-landing .back-title {
+.design-scope .back-title {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
   gap: 0.5rem;
 }
 
-.home-landing .back-title h3 {
+.design-scope .back-title h3 {
   font-family: var(--font-display);
   font-size: 0.875rem;
   line-height: 1.25rem;
   font-weight: 700;
 }
 
-.home-landing .back-title .code {
+.design-scope .back-title .code {
   flex-shrink: 0;
   font-weight: 500;
 }
 
-.home-landing .dept {
+.design-scope .dept {
   margin-top: 0.125rem;
   font-size: 11px;
   font-weight: 500;
   color: #5c5349;
 }
 
-.home-landing .bio {
+.design-scope .bio {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
@@ -803,23 +799,23 @@ body.landing-mode {
   color: #3e3831;
 }
 
-.home-landing .skills {
+.design-scope .skills {
   margin-top: 0.75rem;
 }
 
-.home-landing .skills-title {
+.design-scope .skills-title {
   font-size: 11px;
   font-weight: 700;
 }
 
-.home-landing .skill-list {
+.design-scope .skill-list {
   display: flex;
   flex-wrap: wrap;
   gap: 0.375rem;
   margin-top: 0.375rem;
 }
 
-.home-landing .skill {
+.design-scope .skill {
   padding: 0.125rem 0.5rem;
   border: 1px solid rgba(31, 28, 24, 0.1);
   border-radius: 0.375rem;
@@ -828,12 +824,12 @@ body.landing-mode {
   letter-spacing: -0.025em;
 }
 
-.home-landing .back-foot {
+.design-scope .back-foot {
   padding-top: 0.625rem;
   border-top: 1px solid rgba(31, 28, 24, 0.1);
 }
 
-.home-landing .socials {
+.design-scope .socials {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
@@ -841,17 +837,17 @@ body.landing-mode {
   color: #3e3831;
 }
 
-.home-landing .social {
+.design-scope .social {
   display: flex;
   align-items: center;
   gap: 0.5rem;
 }
 
-.home-landing .social .icon {
+.design-scope .social .icon {
   color: rgba(31, 28, 24, 0.75);
 }
 
-.home-landing .flip-hint {
+.design-scope .flip-hint {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -862,20 +858,20 @@ body.landing-mode {
   color: #6b6257;
 }
 
-.home-landing .flip-hint .icon {
+.design-scope .flip-hint .icon {
   width: 0.75rem;
   height: 0.75rem;
 }
 
-/* ---------- 6) ติดต่อ ---------- */
-.home-landing .contact {
+
+.design-scope .contact {
   width: 100%;
   max-width: 64rem;
   margin: 0 auto;
   padding: 2.5rem 1rem 5rem;
 }
 
-.home-landing .double-divider {
+.design-scope .double-divider {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -884,19 +880,19 @@ body.landing-mode {
   margin: 0 auto 3rem;
 }
 
-.home-landing .line-long {
+.design-scope .line-long {
   width: 100%;
   height: 1px;
   background: rgba(31, 28, 24, 0.2);
 }
 
-.home-landing .line-short {
+.design-scope .line-short {
   width: 66.6667%;
   height: 1px;
   background: rgba(31, 28, 24, 0.15);
 }
 
-.home-landing .contact-card {
+.design-scope .contact-card {
   padding: 1.5rem;
   border: 1px solid rgba(31, 28, 24, 0.12);
   border-radius: 1.5rem;
@@ -904,13 +900,13 @@ body.landing-mode {
   box-shadow: 0 10px 30px -18px rgba(31, 28, 24, 0.16);
 }
 
-.home-landing .contact-grid {
+.design-scope .contact-grid {
   display: grid;
   grid-template-columns: 1fr;
   gap: 2.5rem;
 }
 
-.home-landing .contact-sub {
+.design-scope .contact-sub {
   margin-top: 0.375rem;
   font-size: 0.875rem;
   line-height: 1.25rem;
@@ -918,21 +914,21 @@ body.landing-mode {
   color: #5c5349;
 }
 
-.home-landing .contact-desc {
+.design-scope .contact-desc {
   margin-top: 1rem;
   font-size: 0.875rem;
   line-height: 1.625;
   color: #4e463d;
 }
 
-.home-landing .channels {
+.design-scope .channels {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
   margin-top: 1.5rem;
 }
 
-.home-landing .channel {
+.design-scope .channel {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -943,18 +939,18 @@ body.landing-mode {
   background: #fffdf9;
 }
 
-.home-landing .channel-text {
+.design-scope .channel-text {
   min-width: 0;
 }
 
-.home-landing .channel-label {
+.design-scope .channel-label {
   font-size: 0.75rem;
   line-height: 1rem;
   font-weight: 500;
   color: #6b6257;
 }
 
-.home-landing .channel-value {
+.design-scope .channel-value {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -963,7 +959,7 @@ body.landing-mode {
   font-weight: 600;
 }
 
-.home-landing .copy-btn {
+.design-scope .copy-btn {
   flex-shrink: 0;
   min-height: 2.5rem;
   padding: 0.375rem 0.75rem;
@@ -977,47 +973,47 @@ body.landing-mode {
   transition: background-color 150ms;
 }
 
-.home-landing .copy-btn:hover {
+.design-scope .copy-btn:hover {
   background: #fbe58c;
 }
 
-.home-landing .copy-btn .idle,
-.home-landing .copy-btn .done {
+.design-scope .copy-btn .idle,
+.design-scope .copy-btn .done {
   display: inline-flex;
   align-items: center;
   gap: 0.375rem;
 }
 
-/* กดคัดลอกแล้ว: สลับข้อความเป็น "คัดลอกแล้ว" */
-.home-landing .copy-btn .done,
-.home-landing .copy-btn.copied .idle {
+
+.design-scope .copy-btn .done,
+.design-scope .copy-btn.copied .idle {
   display: none;
 }
 
-.home-landing .copy-btn.copied .done {
+.design-scope .copy-btn.copied .done {
   display: inline-flex;
 }
 
-.home-landing .form-card {
+.design-scope .form-card {
   padding: 1.25rem;
   border: 1px solid rgba(31, 28, 24, 0.1);
   border-radius: 1rem;
   background: #fffdf9;
 }
 
-.home-landing .contact-form {
+.design-scope .contact-form {
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
 
-.home-landing .form-row {
+.design-scope .form-row {
   display: grid;
   grid-template-columns: 1fr;
   gap: 1rem;
 }
 
-.home-landing label {
+.design-scope label {
   display: block;
   font-size: 0.75rem;
   line-height: 1rem;
@@ -1025,8 +1021,8 @@ body.landing-mode {
   color: #3e3831;
 }
 
-.home-landing input,
-.home-landing textarea {
+.design-scope input,
+.design-scope textarea {
   width: 100%;
   margin-top: 0.375rem;
   padding: 0.625rem 0.875rem;
@@ -1037,36 +1033,36 @@ body.landing-mode {
   line-height: 1.25rem;
 }
 
-.home-landing input::placeholder,
-.home-landing textarea::placeholder {
+.design-scope input::placeholder,
+.design-scope textarea::placeholder {
   color: #8e8477;
 }
 
-.home-landing input:focus,
-.home-landing textarea:focus {
+.design-scope input:focus,
+.design-scope textarea:focus {
   outline: none;
   border-color: var(--ink);
 }
 
-.home-landing textarea {
+.design-scope textarea {
   display: block;
   resize: none;
 }
 
-.home-landing .form-error {
+.design-scope .form-error {
   font-size: 0.75rem;
   line-height: 1rem;
   font-weight: 600;
   color: #9b2c2c;
 }
 
-.home-landing .form-submit {
+.design-scope .form-submit {
   display: flex;
   justify-content: flex-end;
   padding-top: 0.25rem;
 }
 
-.home-landing .submit-btn {
+.design-scope .submit-btn {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
@@ -1084,23 +1080,23 @@ body.landing-mode {
   transition: transform 150ms ease-out;
 }
 
-.home-landing .submit-btn .icon {
+.design-scope .submit-btn .icon {
   width: 1rem;
   height: 1rem;
 }
 
-.home-landing .submit-btn:hover {
+.design-scope .submit-btn:hover {
   transform: translateY(-2px);
   background: #c6e6d3;
 }
 
-.home-landing .submit-btn:active {
+.design-scope .submit-btn:active {
   transform: translateY(2px);
   box-shadow: none;
 }
 
-/* กล่องแจ้งส่งสำเร็จ */
-.home-landing .success-box {
+
+.design-scope .success-box {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -1108,7 +1104,7 @@ body.landing-mode {
   padding: 1.5rem 0;
 }
 
-.home-landing .success-icon {
+.design-scope .success-icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -1119,31 +1115,31 @@ body.landing-mode {
   color: #2a4e34;
 }
 
-.home-landing .success-box h3 {
+.design-scope .success-box h3 {
   font-family: var(--font-display);
   font-size: 1.25rem;
   line-height: 1.75rem;
   font-weight: 700;
 }
 
-.home-landing .success-box p {
+.design-scope .success-box p {
   font-size: 0.875rem;
   line-height: 1.625;
   color: #5c5349;
 }
 
-.home-landing .again-btn {
+.design-scope .again-btn {
   margin-top: 0.5rem;
   border-color: rgba(31, 28, 24, 0.18);
 }
 
-/* ---------- 7) ส่วนท้าย ---------- */
-.home-landing .footer {
+
+.design-scope .footer {
   border-top: 1px solid rgba(31, 28, 24, 0.1);
   background: #faf4ea;
 }
 
-.home-landing .footer-inner {
+.design-scope .footer-inner {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1157,230 +1153,225 @@ body.landing-mode {
   color: #6b6257;
 }
 
-.home-landing .footer-title {
+.design-scope .footer-title {
   font-family: var(--font-display);
   font-weight: 600;
   color: var(--ink);
 }
 
-.home-landing .footer-links {
+.design-scope .footer-links {
   display: flex;
   align-items: center;
   gap: 1.25rem;
 }
 
-.home-landing .footer-links a:hover {
+.design-scope .footer-links a:hover {
   color: var(--ink);
 }
 
-/* ==========================================================
-   Responsive (จอใหญ่ขึ้น)
-   sm = 640px, md = 768px, lg = 1024px
-   ========================================================== */
+
 @media (min-width: 640px) {
-  .home-landing .topbar-inner,
-  .home-landing .footer-inner {
+  .design-scope .topbar-inner,
+  .design-scope .footer-inner {
     padding-left: 1.5rem;
     padding-right: 1.5rem;
   }
 
-  .home-landing .hero {
+  .design-scope .hero {
     padding: 3rem 1.5rem 4rem;
   }
 
-  .home-landing .folder-tabs {
+  .design-scope .folder-tabs {
     padding-left: 2.5rem;
   }
 
-  .home-landing .binder {
+  .design-scope .binder {
     padding: 5rem 3.5rem;
   }
 
-  .home-landing .edge {
+  .design-scope .edge {
     display: block;
   }
 
-  .home-landing .punch-holes {
+  .design-scope .punch-holes {
     display: flex;
   }
 
-  .home-landing .halftone-dots {
+  .design-scope .halftone-dots {
     width: 28rem;
     height: 16rem;
   }
 
-  .home-landing .star-pink {
+  .design-scope .star-pink {
     top: 2.5rem;
     left: 6rem;
     width: 3.5rem;
     height: 3.5rem;
   }
 
-  .home-landing .star-yellow {
+  .design-scope .star-yellow {
     right: 5rem;
     bottom: 2.5rem;
     width: 4rem;
     height: 4rem;
   }
 
-  .home-landing .hero-content h1 {
+  .design-scope .hero-content h1 {
     font-size: 6rem;
   }
 
-  .home-landing .hero-subtitle {
+  .design-scope .hero-subtitle {
     font-size: 1rem;
     line-height: 1.5rem;
   }
 
-  .home-landing .details {
+  .design-scope .details {
     padding: 3.5rem 1.5rem;
   }
 
-  .home-landing .details-card {
+  .design-scope .details-card {
     padding: 2.5rem;
   }
 
-  .home-landing .section-title {
+  .design-scope .section-title {
     font-size: 2.25rem;
     line-height: 2.5rem;
   }
 
-  .home-landing .strap {
+  .design-scope .strap {
     height: 5rem;
   }
 
-  .home-landing .members {
+  .design-scope .members {
     padding: 4rem 1.5rem;
   }
 
-  .home-landing .members-grid {
+  .design-scope .members-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .home-landing .contact {
+  .design-scope .contact {
     padding: 3.5rem 1.5rem 6rem;
   }
 
-  .home-landing .contact-card {
+  .design-scope .contact-card {
     padding: 2.5rem;
   }
 
-  .home-landing .form-card {
+  .design-scope .form-card {
     padding: 1.75rem;
   }
 
-  .home-landing .form-row {
+  .design-scope .form-row {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .home-landing .footer-inner {
+  .design-scope .footer-inner {
     flex-direction: row;
   }
 }
 
 @media (min-width: 768px) {
-  .home-landing .main-nav {
+  .design-scope .main-nav {
     display: flex;
   }
 
-  .home-landing .details-head {
+  .design-scope .details-head {
     flex-direction: row;
     align-items: flex-end;
     justify-content: space-between;
   }
 
-  .home-landing .pillars {
+  .design-scope .pillars {
     grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
   }
 
-  .home-landing .members-grid {
+  .design-scope .members-grid {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
 @media (min-width: 1024px) {
-  .home-landing .members-grid {
+  .design-scope .members-grid {
     grid-template-columns: repeat(5, 1fr);
     row-gap: 0;
   }
 
-  /* การ์ดแต่ละใบห้อยลงไม่เท่ากัน (ค่ามาจาก --drop ใน script.js) */
-  .home-landing .strap-wrap {
+  
+  .design-scope .strap-wrap {
     padding-top: var(--drop);
   }
 
-  .home-landing .contact-grid {
+  .design-scope .contact-grid {
     grid-template-columns: repeat(12, 1fr);
     align-items: start;
   }
 
-  .home-landing .contact-left {
+  .design-scope .contact-left {
     grid-column: span 5;
   }
 
-  .home-landing .contact-right {
+  .design-scope .contact-right {
     grid-column: span 7;
   }
 }
 
-/* ผู้ใช้ปิดแอนิเมชันในระบบ */
+
 @media (prefers-reduced-motion: reduce) {
-  html:has(.home-landing) {
+  html:has(body.landing-mode) {
     scroll-behavior: auto;
   }
 
-  .home-landing .card-inner {
+  .design-scope .card-inner {
     transition-duration: 150ms;
   }
 }
 
-/* ==========================================================
-   ส่วนที่เพิ่มภายหลัง (วางไว้ท้ายไฟล์เพื่อให้มีผลเหนือกฎด้านบน)
-   ========================================================== */
 
-/* หัวข้อ TEAM PROJECT และข้อความ อยู่ตรงกลาง */
-.home-landing .details-head {
+
+
+.design-scope .details-head {
   align-items: center;
   justify-content: center;
   text-align: center;
 }
 
-.home-landing .details-summary {
+.design-scope .details-summary {
   margin-left: auto;
   margin-right: auto;
   text-align: center;
 }
 
-/* อีเมลหลังการ์ด: แสดงครบทุกบรรทัด ไม่ตัดด้วย ... */
-.home-landing .social {
+
+.design-scope .social {
   align-items: flex-start;
   font-size: 11px;
   color: #3e3831;
 }
 
-.home-landing .social .icon {
+.design-scope .social .icon {
   margin-top: 2px;
 }
 
-.home-landing .social span {
+.design-scope .social span {
   min-width: 0;
   overflow-wrap: anywhere;
 }
 
-/* ส่วน CONTACT: หัวข้อและปุ่มอยู่ตรงกลาง */
-.home-landing .contact-card {
+
+.design-scope .contact-card {
   text-align: center;
 }
 
-.home-landing .contact-action {
+.design-scope .contact-action {
   display: flex;
   justify-content: center;
   margin-top: 1.5rem;
 }
 
-/* ปุ่ม GitLab (สไตล์เดียวกับปุ่มเขียวมิ้นต์เดิม) */
-.home-landing .github-btn {
+
+.design-scope .github-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -1397,27 +1388,27 @@ body.landing-mode {
   transition: transform 150ms ease-out;
 }
 
-.home-landing .github-btn:hover {
+.design-scope .github-btn:hover {
   transform: translateY(-2px);
   background: #c6e6d3;
 }
 
-.home-landing .github-btn:active {
+.design-scope .github-btn:active {
   transform: translateY(2px);
   box-shadow: none;
 }
 
-/* เส้นคั่นเหนือ CONTACT: เส้นเดียวเต็มความกว้าง เหมือนหัวข้ออื่น */
-.home-landing .double-divider {
+
+.design-scope .double-divider {
   max-width: none;
   margin-bottom: 2.5rem;
 }
 
-.home-landing .line-long {
+.design-scope .line-long {
   background: rgba(31, 28, 24, 0.18);
 }
 
-html:has(.home-landing) {
+html:has(body.landing-mode) {
   display: block;
   width: 100%;
   height: auto;

@@ -14,7 +14,7 @@ export default function MembersPage({ members, onOpenMemberModal, onOpenArtworkM
 
   return (
     <div className="pro-app-window">
-      {/* ── TOP HEADER ── */}
+      
       <header className="pro-header">
         <div className="pro-brand-zone">
           <div className="pro-logo-badge">
@@ -64,7 +64,7 @@ export default function MembersPage({ members, onOpenMemberModal, onOpenArtworkM
         </div>
       </header>
 
-      {/* ── MEMBERS DIRECTORY BODY ── */}
+      
       <div className="pro-workspace-body members-page-layout">
         <div className="pro-members-header">
           <div>
@@ -96,7 +96,7 @@ export default function MembersPage({ members, onOpenMemberModal, onOpenArtworkM
                 <strong>ทักษะ:</strong> <span>{m.skills}</span>
               </div>
 
-              {/* Artwork Samples */}
+              
               <div className="member-art-preview-wrap">
                 <div className="preview-label">ผลงานตัวอย่าง:</div>
                 <div className="preview-thumbnails-row">

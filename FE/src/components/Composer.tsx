@@ -26,7 +26,7 @@ export default function Composer({ onSend, disabled }: ComposerProps) {
   return (
     <div className="pro-composer-wrapper">
       <form className="pro-composer-form" onSubmit={handleSubmit}>
-        {/* Attachment Paperclip Icon */}
+        
         <button
           type="button"
           className="pro-attach-btn"
@@ -39,7 +39,7 @@ export default function Composer({ onSend, disabled }: ComposerProps) {
           </svg>
         </button>
 
-        {/* Input Field */}
+        
         <input
           value={text}
           onChange={(e) => setText(e.target.value)}
@@ -49,10 +49,10 @@ export default function Composer({ onSend, disabled }: ComposerProps) {
           aria-label="พิมพ์ข้อความคำสั่ง"
         />
 
-        {/* Enter key badge indicator */}
+        
         <span className="pro-enter-hint">Enter</span>
 
-        {/* Submit button */}
+        
         <button
           type="submit"
           className="pro-submit-btn"

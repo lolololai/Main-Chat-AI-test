@@ -18,7 +18,7 @@ export default function MemberModal({
   return (
     <div className="pro-modal-overlay" onClick={onClose} role="dialog" aria-modal="true">
       <div className="pro-modal-window" onClick={(e) => e.stopPropagation()}>
-        {/* Header Bar */}
+        
         <div className="pro-modal-header">
           <div className="pro-modal-title-left">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -35,9 +35,9 @@ export default function MemberModal({
           </button>
         </div>
 
-        {/* Modal Body */}
+        
         <div className="pro-modal-body">
-          {/* Profile Card */}
+          
           <div className="pro-profile-summary-card">
             <img src={member.avatar} alt={member.name} className="pro-modal-avatar" />
             <div className="pro-modal-bio-info">
@@ -67,7 +67,7 @@ export default function MemberModal({
             )}
           </div>
 
-          {/* Section: Artworks Gallery */}
+          
           <div className="pro-modal-section">
             <h4 className="pro-section-title">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -99,7 +99,7 @@ export default function MemberModal({
             </div>
           </div>
 
-          {/* Section: Projects */}
+          
           <div className="pro-modal-section">
             <h4 className="pro-section-title">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

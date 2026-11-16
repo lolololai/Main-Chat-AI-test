@@ -26,9 +26,6 @@ export default function ImageModal({ artwork, onClose, onViewMember }: ImageModa
           <div className="lightbox-title-wrap">
             <span className="lightbox-tag-pill">{artwork.tag}</span>
             <span className="lightbox-title-text">{artwork.title}</span>
-            {is3D && (
-              <span className="badge-3d-interactive">Interactive 3D</span>
-            )}
           </div>
 
           <div className="lightbox-header-actions">

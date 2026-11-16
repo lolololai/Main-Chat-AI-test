@@ -7,7 +7,7 @@
 }
 
 :root {
-  /* Enterprise Palette */
+  
   --pro-bg:              #fbf3f5;
   --pro-window-bg:       #ffffff;
   --pro-surface:         #fdf7f8;
@@ -16,7 +16,7 @@
   --pro-border-dark:     #e3c5cd;
   --pro-border-focus:    #ec587e;
   
-  /* Primary & Accents */
+  
   --pro-primary:         #ec587e;
   --pro-primary-hover:   #db4068;
   --pro-primary-light:   #fdecf1;
@@ -25,13 +25,13 @@
   --pro-accent-orange:   #f59e0b;
   --pro-accent-blue:     #3b82f6;
 
-  /* Typography */
+  
   --pro-text-main:       #1e293b;
   --pro-text-muted:      #64748b;
   --pro-text-subtle:     #94a3b8;
   --pro-text-white:      #ffffff;
 
-  /* Elevation */
+  
   --shadow-sm:           0 1px 2px rgba(0,0,0,0.03), 0 1px 4px rgba(220,100,130,0.04);
   --shadow-md:           0 4px 14px rgba(0,0,0,0.04), 0 2px 6px rgba(220,100,130,0.06);
   --shadow-lg:           0 10px 30px rgba(0,0,0,0.06), 0 4px 12px rgba(220,100,130,0.08);
@@ -66,9 +66,7 @@ html, body {
   padding: 14px;
 }
 
-/* ═══════════════════════════════════════
-   APP WINDOW (Enterprise Clean Shell)
-   ═══════════════════════════════════════ */
+
 .pro-app-window {
   width: min(1200px, 98vw);
   height: min(840px, 96vh);
@@ -84,7 +82,7 @@ html, body {
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* ── Top Header ── */
+
 .pro-header {
   display: flex;
   align-items: center;
@@ -157,7 +155,7 @@ html, body {
   text-overflow: ellipsis;
 }
 
-/* Nav Tabs */
+
 .pro-nav-tabs {
   display: flex;
   align-items: center;
@@ -191,7 +189,7 @@ html, body {
   border-color: #fed7e2;
 }
 
-/* Header Right */
+
 .pro-header-right {
   display: flex;
   align-items: center;
@@ -264,7 +262,7 @@ html, body {
   color: var(--pro-primary);
 }
 
-/* Status Dots */
+
 .status-dot {
   width: 7px;
   height: 7px;
@@ -276,9 +274,7 @@ html, body {
 .dot-orange { background: #f59e0b; }
 .dot-blue   { background: #0ea5e9; }
 
-/* ═══════════════════════════════════════
-   WORKSPACE BODY (Sidebar + Chat Grid)
-   ═══════════════════════════════════════ */
+
 .pro-workspace-body {
   flex: 1;
   display: flex;
@@ -288,7 +284,7 @@ html, body {
   min-height: 0;
 }
 
-/* ── Sidebar ── */
+
 .pro-sidebar {
   width: 280px;
   min-width: 280px;
@@ -303,7 +299,7 @@ html, body {
   -webkit-overflow-scrolling: touch;
 }
 
-/* Mobile Sidebar Close Bar inside drawer */
+
 .mobile-sidebar-close-bar {
   display: none;
   align-items: center;
@@ -444,7 +440,7 @@ html, body {
 .tag-pink { background: #fdf2f4; color: #ec587e; border: 1px solid #fce7f3; }
 .tag-blue { background: #f0f9ff; color: #0284c7; border: 1px solid #e0f2fe; }
 
-/* Templates List */
+
 .template-title-left {
   display: flex;
   align-items: center;
@@ -508,7 +504,7 @@ html, body {
   line-height: 1.35;
 }
 
-/* Directory */
+
 .directory-list {
   display: flex;
   flex-direction: column;
@@ -571,7 +567,7 @@ html, body {
   border-color: #fecaca;
 }
 
-/* Sidebar Footer Tags */
+
 .pro-sidebar-bottom-tags {
   margin-top: auto;
   display: flex;
@@ -602,9 +598,7 @@ html, body {
   align-items: center;
 }
 
-/* ═══════════════════════════════════════
-   CHAT AREA & BUBBLES (Pro Layout)
-   ═══════════════════════════════════════ */
+
 .pro-chat-main {
   flex: 1;
   display: flex;
@@ -641,7 +635,7 @@ html, body {
 .chatlog-empty-title { font-size: 15px; font-weight: 700; color: #0f172a; }
 .chatlog-empty-hint { font-size: 12.5px; max-width: 380px; line-height: 1.5; color: var(--pro-text-muted); }
 
-/* Pro Message Row */
+
 .pro-message-row {
   display: flex;
   gap: 12px;
@@ -684,7 +678,7 @@ html, body {
 }
 .row-user .pro-message-content { align-items: flex-end; }
 
-/* Metadata line */
+
 .pro-message-meta {
   display: flex;
   align-items: center;
@@ -706,7 +700,7 @@ html, body {
 .badge-engine  { background: #fdf2f4; color: #ec587e; }
 .badge-version { background: #f1f5f9; color: var(--pro-text-muted); }
 
-/* Bubbles */
+
 .pro-bubble {
   padding: 12px 18px;
   font-size: 13.5px;
@@ -732,7 +726,7 @@ html, body {
   border-top-right-radius: 2px;
 }
 
-/* Typing */
+
 .typing {
   display: flex;
   align-items: center;
@@ -753,7 +747,7 @@ html, body {
   40% { transform: translateY(-6px); opacity: 1; }
 }
 
-/* Actions bar */
+
 .pro-actions-bar {
   display: flex;
   padding: 0 4px;
@@ -817,9 +811,7 @@ html, body {
   white-space: nowrap;
 }
 
-/* ═══════════════════════════════════════
-   ARTWORKS GALLERY CARD (2 Column Professional)
-   ═══════════════════════════════════════ */
+
 .pro-artworks-container {
   margin-top: 14px;
   display: flex;
@@ -994,7 +986,7 @@ html, body {
   transform: translateY(-1px);
 }
 
-/* Engine Metadata Footer */
+
 .pro-engine-metadata-footer {
   display: flex;
   align-items: center;
@@ -1040,9 +1032,7 @@ html, body {
   color: var(--pro-text-main);
 }
 
-/* ═══════════════════════════════════════
-   COMPOSER (Clean Modern Input)
-   ═══════════════════════════════════════ */
+
 .pro-composer-wrapper {
   padding: 12px 20px 14px;
   background: #ffffff;
@@ -1133,7 +1123,7 @@ html, body {
   cursor: not-allowed;
 }
 
-/* Scroll button */
+
 .scroll-to-bottom {
   position: absolute;
   bottom: 80px;
@@ -1159,7 +1149,7 @@ html, body {
   transform: translateY(-2px);
 }
 
-/* Error Banner */
+
 .pro-error-banner {
   background: #fef2f2;
   border-bottom: 1px solid #fecaca;
@@ -1171,7 +1161,7 @@ html, body {
   gap: 8px;
 }
 
-/* ── BOTTOM STATUS BAR ── */
+
 .pro-footer-statusbar {
   display: flex;
   align-items: center;
@@ -1192,9 +1182,7 @@ html, body {
 }
 .status-separator { color: #e2e8f0; }
 
-/* ═══════════════════════════════════════
-   MODAL WINDOWS & DIALOGS
-   ═══════════════════════════════════════ */
+
 .pro-modal-overlay, .pro-lightbox-overlay {
   position: fixed;
   inset: 0;
@@ -1397,7 +1385,7 @@ html, body {
   color: var(--pro-text-muted);
 }
 
-/* Lightbox Modal Window */
+
 .pro-lightbox-header .lightbox-title-wrap {
   display: flex;
   align-items: center;
@@ -1530,9 +1518,7 @@ html, body {
 }
 .btn-view-member-pro:hover { background: #fce7f3; }
 
-/* ═══════════════════════════════════════
-   THREE.JS 3D MODEL VIEWPORT
-   ═══════════════════════════════════════ */
+
 .three-viewport-wrapper {
   display: flex;
   flex-direction: column;
@@ -1765,7 +1751,7 @@ html, body {
 }
 .three-file-input { display: none; }
 
-/* Clear Confirm Dialog */
+
 .pro-confirm-dialog {
   background: #ffffff;
   border: 1px solid var(--pro-border);
@@ -1808,9 +1794,7 @@ html, body {
   cursor: pointer;
 }
 
-/* ═══════════════════════════════════════
-   HOME HERO & MEMBERS DIRECTORY
-   ═══════════════════════════════════════ */
+
 .home-workspace-layout, .members-page-layout {
   padding: 24px;
   display: flex;
@@ -1942,7 +1926,7 @@ html, body {
   color: var(--pro-text-main);
 }
 
-/* Members Grid Page */
+
 .pro-members-header {
   width: 100%;
   display: flex;
@@ -2063,11 +2047,9 @@ html, body {
 }
 .btn-open-full-portfolio:hover { background: #fce7f3; }
 
-/* ═══════════════════════════════════════
-   RESPONSIVE DESIGN (All Platforms: Mobile, iPad/Tablet, Mac, Win, Large Display)
-   ═══════════════════════════════════════ */
 
-/* 1. Large Displays (iMac 24"/27", 2K, 4K Displays >= 1440px) */
+
+
 @media (min-width: 1440px) {
   .pro-app-window {
     width: min(1360px, 94vw);
@@ -2083,7 +2065,7 @@ html, body {
   }
 }
 
-/* 2. Laptops & Standard Desktops (MacBook Pro/Air, 1080p, 1025px - 1439px) */
+
 @media (min-width: 1025px) and (max-width: 1439px) {
   .pro-app-window {
     width: min(1200px, 96vw);
@@ -2092,7 +2074,7 @@ html, body {
   }
 }
 
-/* 3. Tablets / iPad (769px - 1024px) */
+
 @media (min-width: 769px) and (max-width: 1024px) {
   #root {
     padding: 8px;
@@ -2126,14 +2108,14 @@ html, body {
   }
 }
 
-/* 4. Tablets in Portrait & Large Mobile / Phablets (<= 900px) */
+
 @media (max-width: 900px) {
   .pro-artworks-grid {
     grid-template-columns: 1fr;
   }
 }
 
-/* 5. Mobile Phones & Compact Screens (<= 768px) */
+
 @media (max-width: 768px) {
   html, body {
     overflow: hidden;
@@ -2152,14 +2134,14 @@ html, body {
     box-shadow: none;
   }
 
-  /* Header on Mobile */
+  
   .pro-header {
     padding: 8px 12px;
     min-height: 48px;
     gap: 8px;
   }
 
-  /* Mobile Drawer Toggle & Nav Tabs */
+  
   .mobile-drawer-toggle {
     display: none !important;
   }
@@ -2181,7 +2163,7 @@ html, body {
     font-size: 10px;
   }
 
-  /* Completely Hide Sidebar on Mobile — Only Chat Remains */
+  
   .pro-sidebar {
     display: none !important;
   }
@@ -2194,12 +2176,12 @@ html, body {
     display: none !important;
   }
 
-  /* Footer Statusbar: Hide on Mobile to give 100% focus to Chat */
+  
   .pro-footer-statusbar {
     display: none !important;
   }
 
-  /* Chat Log & Message Rows */
+  
   .chatlog {
     padding: 12px;
     gap: 14px;
@@ -2229,10 +2211,10 @@ html, body {
   }
 
   .pro-bubble-actions {
-    opacity: 1; /* Always visible on touch screens */
+    opacity: 1; 
   }
 
-  /* Artworks Grid on Mobile */
+  
   .pro-artworks-grid {
     grid-template-columns: 1fr;
     gap: 10px;
@@ -2248,7 +2230,7 @@ html, body {
     gap: 4px;
   }
 
-  /* Composer Input Bar on Mobile */
+  
   .pro-composer-wrapper {
     padding: 8px 10px max(10px, env(safe-area-inset-bottom));
   }
@@ -2271,7 +2253,7 @@ html, body {
     font-size: 11.5px;
   }
   .pro-submit-btn span {
-    display: none; /* Icon-only on mobile to save width */
+    display: none; 
   }
 
   .scroll-to-bottom {
@@ -2281,12 +2263,12 @@ html, body {
     height: 32px;
   }
 
-  /* Status Bar on Mobile: Hidden to prioritize full chat experience */
+  
   .pro-footer-statusbar {
     display: none !important;
   }
 
-  /* Modals on Mobile */
+  
   .pro-modal-overlay, .pro-lightbox-overlay {
     padding: 8px;
   }
@@ -2323,7 +2305,7 @@ html, body {
     grid-template-columns: 1fr;
   }
 
-  /* 3D viewport on Mobile */
+  
   .three-stage {
     height: clamp(240px, 42vh, 340px);
     height: clamp(240px, 42dvh, 340px);
@@ -2333,7 +2315,7 @@ html, body {
   .three-btn { padding: 6px 9px; font-size: 10.5px; }
   .three-btn-upload { margin-left: 0; }
 
-  /* Home Page on Mobile */
+  
   .home-workspace-layout, .members-page-layout {
     padding: 12px;
   }
@@ -2357,7 +2339,7 @@ html, body {
   }
 }
 
-/* 6. Ultra-narrow Mobile (iPhone SE, Galaxy Mini <= 380px) */
+
 @media (max-width: 380px) {
   .badge-enterprise {
     display: none;
@@ -2379,7 +2361,7 @@ html, body {
   }
 }
 
-/* Animations */
+
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }

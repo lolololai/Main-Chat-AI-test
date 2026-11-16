@@ -5,9 +5,9 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { RoomEnvironment } from "three/examples/jsm/environments/RoomEnvironment.js";
 
 interface ThreeViewProps {
-  /** รูปร่างสำรองกรณีไม่ได้ระบุไฟล์โมเดล */
+  
   modelType?: "cyber-cube" | "retro-torus" | "crystal-sphere" | "game-asset";
-  /** path ไปยังไฟล์ .glb / .gltf (เช่น /models/Fox.glb) */
+  
   modelUrl?: string;
   title?: string;
   wireframeDefault?: boolean;
@@ -432,11 +432,7 @@ export default function ThreeView({
   return (
     <div className="three-viewport-wrapper">
       <div className="three-viewport-header">
-        <div className="three-title-tag">
-          <span className="three-engine-badge">THREE.JS WebGL</span>
-          {title && <span className="three-model-name">{title}</span>}
-        </div>
-        <span className="three-hint-text">ลากเพื่อหมุน 360° • สกอร์ลเพื่อซูม • นำเข้าโมเดลได้</span>
+        <span className="three-hint-text">ลากเพื่อหมุน 360° • สกอร์ลเพื่อซูม</span>
       </div>
 
       <div className="three-stage">
@@ -503,19 +499,6 @@ export default function ThreeView({
           <span>{wireframe ? "Wireframe" : "Shaded"}</span>
         </button>
 
-        <button
-          type="button"
-          className="three-btn"
-          onClick={() => setColorMode((prev) => (prev + 1) % COLORS.length)}
-          title="เปลี่ยนโทนแสงของฉาก"
-        >
-          <span
-            className="three-color-dot"
-            style={{ background: `#${COLORS[colorMode].main.toString(16).padStart(6, "0")}` }}
-          />
-          <span>โทน: {COLORS[colorMode].name}</span>
-        </button>
-
         {hasAnimation && (
           <button
             type="button"
@@ -540,20 +523,6 @@ export default function ThreeView({
             <polyline points="3 3 3 8 8 8" />
           </svg>
           <span>รีเซ็ตมุมมอง</span>
-        </button>
-
-        <button
-          type="button"
-          className="three-btn three-btn-upload"
-          onClick={() => fileInputRef.current?.click()}
-          title="เลือกไฟล์โมเดล 3D จากเครื่อง (.glb / .gltf)"
-        >
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-            <polyline points="17 8 12 3 7 8" />
-            <line x1="12" y1="3" x2="12" y2="15" />
-          </svg>
-          <span>นำเข้าโมเดล</span>
         </button>
 
         <input

@@ -58,7 +58,7 @@ export default function MessageBubble({
 
   return (
     <div className={`pro-message-row ${isUser ? 'row-user' : 'row-assistant'}`}>
-      {/* Assistant Flask / AI Logo */}
+      
       {!isUser && (
         <div className="pro-avatar pro-avatar-ai" title="AI Creative Engine" aria-hidden="true">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -70,7 +70,7 @@ export default function MessageBubble({
       )}
 
       <div className="pro-message-content">
-        {/* Header Metadata */}
+        
         <div className="pro-message-meta">
           {!isUser ? (
             <>
@@ -84,7 +84,7 @@ export default function MessageBubble({
           )}
         </div>
 
-        {/* Message Bubble Card */}
+        
         <div className={`pro-bubble ${isUser ? 'pro-bubble-user' : 'pro-bubble-assistant'}`}>
           {editing ? (
             <div className="pro-bubble-edit">
@@ -109,7 +109,7 @@ export default function MessageBubble({
             <>
               <div className="pro-bubble-text">{message.text}</div>
 
-              {/* Artwork Cards Gallery (2 columns responsive layout) */}
+              
               {message.artworks && message.artworks.length > 0 && (
                 <div className="pro-artworks-container">
                   <div className="pro-artworks-grid">
@@ -123,7 +123,7 @@ export default function MessageBubble({
                     ))}
                   </div>
 
-                  {/* Creative Engine Footer Metrics */}
+                  
                   <div className="pro-engine-metadata-footer">
                     <div className="pro-meta-right-icons">
                       <button type="button" className="meta-icon-btn" title="คัดลอก Prompt" aria-label="คัดลอก Prompt">
@@ -147,13 +147,13 @@ export default function MessageBubble({
           )}
         </div>
 
-        {/* Action Buttons for user */}
+        
         <div className="pro-actions-bar">
 
         </div>
       </div>
 
-      {/* User Avatar */}
+      
 
     </div>
   );
