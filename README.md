@@ -4,14 +4,9 @@
 git clone 
 cd Main-Chat-AI
 
-3. ติดตั้ง 
+3. สร้าง `BE/.env` copy code จาก `BE/.env.example` และใส่ `LLM_API_KEY`
 
-npm install ทั้ง FE และ BE
-
-
-4. สร้าง `BE/.env` copy code จาก `BE/.env.example` แล้วใส่ `LLM_API_KEY` 
-
-5. docker-compose build
+4. docker-compose build — ติดตั้ง dependency ทั้ง FE และ BE ใน Dockerfile อัตโนมัติ (`RUN npm ci` ของ BE และ `RUN npm install` ของ FE) โดยไม่ต้อง `npm install` บนโฮสต์
 
 
 หน้า Home, หน้าสมาชิก และโมเดล 3D ใช้ข้อมูลฝั่ง FE จึงเปิดได้ไม่ต้องรัน BE — เฉพาะหน้า CHAT AI ที่ต้องรัน BE
