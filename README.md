@@ -1,4 +1,4 @@
-1. Fork โปรเจกต์ไปไว้ในบัญชี GitLab ของตัวเอง แล้วตั้ง Visibility เป็น **Public**
+1. Fork โปรเจกต์ไปไว้ใน Github ของตัวเอง แล้วตั้ง 
 2. Clone จาก fork ของตัวเอง
 
 git clone 
