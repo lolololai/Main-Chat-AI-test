@@ -55,11 +55,12 @@ docker compose up --build
 
 ## รันบน Vercel และ Render
 
-### Vercel — หน้าที่ไม่ต้อง BE
-- เชื่อม GitHub เข้ากับ [Vercel](https://vercel.com/dashboard) → Import Project — Vercel build เองจาก `vercel.json` (`cd FE && npm run build`)
-- ตั้งค่า env `BE_URL` = URL ของ BE ที่รันบน Render (เช่น `https://main-chat-ai-be-xxx.onrender.com`) ใน Dashboard ของ Vercel — เพื่อให้หน้า CHAT AI ใช้งานได้
-- `api/messages.ts` / `api/status.ts` คือ serverless proxy ส่งต่อ `/messages` และ `/status` ไปยัง BE ผ่าน `BE_URL`
-- ถ้าไม่ได้ตั้ง `BE_URL`: Home / MEMBERS / CHAT PAGE ยังใช้งานได้ปกติ (หน้า AI จะแสดงสถานะ AI ไม่ได้)
+### Vercel — ใช้งานเต็มฟีเจอร์ (CHAT AI ต้องมี BE บน Vercel)
+- เชื่อม GitHub เข้ากับ [Vercel](https://vercel.com/dashboard) → Import Project — Vercel build ทั้งสอง services จาก `vercel.json`:
+  - **`fe`** (root `FE/`, runtime container, entrypoint `Dockerfile`) — nginx แสดง Home / MEMBERS / CHAT PAGE (static จาก `FE/dist`)
+  - **`be`** (root `BE/`, runtime container, entrypoint `Dockerfile`) — Express API + SQLite (พอร์ท 3000)
+- `/messages` และ `/status` ถูก rewrite ไปยัง service `be` โดยอัตโนมัติ — Home / MEMBERS / CHAT PAGE ทำงานปกติ และหน้า CHAT AI จะเชื่อมกับ BE ได้เลย
+- ตั้งค่า env ใน Vercel Dashboard: `LLM_API_KEY` (ตาม `BE/.env.example` เพื่อใช้หน้า CHAT AI), `LLM_MODEL` (optional)
 
 ### Render — รันทั้ง BE และ FE
 - นำ `render.yaml` (อยู่ที่ repo root) มาใช้ผ่าน Dashboard: **Web Service** `be` (Node runtime, `cd BE && npm start` — Express + node:sqlite พอร์ท 3000) และ **Static Site** `fe` (build `cd FE && npm run build` → serve ที่ `FE/dist`)

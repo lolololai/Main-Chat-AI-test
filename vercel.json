@@ -1,10 +1,20 @@
 {
   "version": 2,
-  "buildCommand": "cd FE && npm run build",
-  "outputDirectory": "FE/dist",
+  "services": {
+    "be": {
+      "root": "BE/",
+      "runtime": "container",
+      "entrypoint": "Dockerfile"
+    },
+    "fe": {
+      "root": "FE/",
+      "runtime": "container",
+      "entrypoint": "Dockerfile"
+    }
+  },
   "rewrites": [
-    { "source": "/messages(.*)", "destination": "/api/messages" },
-    { "source": "/status", "destination": "/api/status" },
-    { "source": "/(.*)", "destination": "/index.html" }
+    { "source": "/messages(.*)", "destination": { "service": "be" } },
+    { "source": "/status", "destination": { "service": "be" } },
+    { "source": "/(.*)", "destination": { "service": "fe" } }
   ]
 }
