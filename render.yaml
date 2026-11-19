@@ -1,0 +1,17 @@
+# Deploy ผ่าน Render Dashboard:
+#   1. Web Service — "be": Node runtime, run `cd BE && npm start` (Express + node:sqlite, พอร์ท 3000)
+#   2. Static Site   — "fe": build `cd FE && npm run build` → serve FE/dist (Home, Members, Chat page)
+services:
+  - type: web
+    name: main-chat-ai-be
+    runtime: node
+    buildCommand: cd BE && npm install
+    startCommand: cd BE && npm start
+    envVars:
+      - key: PORT
+        value: "3000"
+
+  - type: staticSite
+    name: main-chat-ai-fe
+    buildCommand: cd FE && npm run build
+    staticPublishPath: FE/dist

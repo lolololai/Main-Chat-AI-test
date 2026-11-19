@@ -52,3 +52,15 @@ docker compose up --build
 ```
 
 **เครดิตโมเดลตัวอย่าง:** `Fox.glb` จาก [Khronos glTF Sample Assets](https://github.com/KhronosGroup/glTF-Sample-Assets/tree/main/Models/Fox) — model © PixelMannen (CC0), rigging & animation © tomkranis (CC BY 4.0), glTF conversion © AsoboStudio & scurest (CC BY 4.0)
+
+## รันบน Vercel และ Render
+
+### Vercel — หน้าที่ไม่ต้อง BE
+- เชื่อม GitHub เข้ากับ [Vercel](https://vercel.com/dashboard) → Import Project — Vercel build เองจาก `vercel.json` (`cd FE && npm run build`)
+- ตั้งค่า env `BE_URL` = URL ของ BE ที่รันบน Render (เช่น `https://main-chat-ai-be-xxx.onrender.com`) ใน Dashboard ของ Vercel — เพื่อให้หน้า CHAT AI ใช้งานได้
+- `api/messages.ts` / `api/status.ts` คือ serverless proxy ส่งต่อ `/messages` และ `/status` ไปยัง BE ผ่าน `BE_URL`
+- ถ้าไม่ได้ตั้ง `BE_URL`: Home / MEMBERS / CHAT PAGE ยังใช้งานได้ปกติ (หน้า AI จะแสดงสถานะ AI ไม่ได้)
+
+### Render — รันทั้ง BE และ FE
+- นำ `render.yaml` (อยู่ที่ repo root) มาใช้ผ่าน Dashboard: **Web Service** `be` (Node runtime, `cd BE && npm start` — Express + node:sqlite พอร์ท 3000) และ **Static Site** `fe` (build `cd FE && npm run build` → serve ที่ `FE/dist`)
+- บน Static Site เปิด **SPA Fallback** ใน Dashboard ของ Render เพื่อให้ /chat, /members ทำงาน

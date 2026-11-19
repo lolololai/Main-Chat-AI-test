@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "buildCommand": "cd FE && npm run build",
+  "outputDirectory": "FE/dist",
+  "rewrites": [
+    { "source": "/messages(.*)", "destination": "/api/messages" },
+    { "source": "/status", "destination": "/api/status" },
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}
