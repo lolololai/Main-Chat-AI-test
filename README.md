@@ -2,7 +2,7 @@
 2. Clone จาก fork ของตัวเอง
 
 git clone 
-cd Main-Chat-UI
+cd Main-Chat-AI
 
 3. ติดตั้ง 
 
