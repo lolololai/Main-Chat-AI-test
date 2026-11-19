@@ -2,7 +2,7 @@
 2. Clone จาก fork ของตัวเอง
 
 git clone 
-cd bu-web-technology-week-9
+cd Main-Chat-UI
 
 3. ติดตั้ง 
 
