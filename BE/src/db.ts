@@ -78,10 +78,12 @@ export function clearMessages(): void {
   qClear.run();
 }
 
+// ===== ข้อมูล portfolio ของเรา (ให้บอทใช้ตอบ) =====
 db.exec(`
   CREATE TABLE IF NOT EXISTS profile (
     id     INTEGER PRIMARY KEY AUTOINCREMENT,
     name   TEXT NOT NULL,
+    nickname TEXT NOT NULL DEFAULT '',
     bio    TEXT NOT NULL,
     skills TEXT NOT NULL
   );
@@ -95,8 +97,18 @@ db.exec(`
   );
 `);
 
+// เพิ่ม migration สำหรับฐานข้อมูลเก่า: ถ้าตาราง profile มีอยู่แล้วแต่ขาดคอลังก์
+// nickname (CREATE TABLE IF NOT EXISTS ไม่สามารถเพิ่มคอลังก์ให้ตารางเก่าได้)
+const hasNickname = db
+  .prepare("SELECT name FROM pragma_table_info('profile') WHERE name = 'nickname'")
+  .get() as { name: string } | undefined;
+if (!hasNickname) {
+  db.exec("ALTER TABLE profile ADD COLUMN nickname TEXT NOT NULL DEFAULT ''");
+}
+
 export interface ProfileRow {
   name: string;
+  nickname: string;
   bio: string;
   skills: string;
 }
@@ -107,8 +119,9 @@ export interface ProjectRow {
   tech: string;
 }
 
+// รวมข้อมูล portfolio จาก SQLite เป็นข้อความเดียว ไว้ใส่ใน system prompt
 export function getPortfolioContext(): string {
-  const profiles = db.prepare("SELECT id, name, bio, skills FROM profile").all() as any[];
+  const profiles = db.prepare("SELECT id, name, nickname, bio, skills FROM profile").all() as any[];
   if (profiles.length === 0) return "(ยังไม่มีข้อมูล portfolio)";
 
   const lines: string[] = [];
@@ -117,6 +130,7 @@ export function getPortfolioContext(): string {
     
     lines.push(`--- นักศึกษา: ${profile.name} ---`);
     lines.push(`ชื่อ: ${profile.name}`);
+    lines.push(`ชื่อเล่น: ${profile.nickname}`);
     lines.push(`แนะนำตัว: ${profile.bio}`);
     lines.push(`ทักษะ: ${profile.skills}`);
     lines.push("โปรเจกต์:");
@@ -128,19 +142,21 @@ export function getPortfolioContext(): string {
   return lines.join("\n");
 }
 
+// --- 3. ฟังก์ชันบันทึกข้อมูลนักศึกษาหลายคนพร้อมกัน (ใช้ตอนรัน seed) ---
 export interface StudentData {
-  profile: { name: string; bio: string; skills: string };
+  profile: { name: string; nickname: string; bio: string; skills: string };
   projects: { title: string; description: string; tech: string }[];
 }
 
 export function saveAllStudents(students: StudentData[]): void {
   db.exec("BEGIN");
   try {
+    // ล้างข้อมูลเก่าทิ้งก่อน เพื่อใส่ชุดใหม่ที่อัปเดตแล้ว
     db.exec("DELETE FROM projects");
     db.exec("DELETE FROM profile");
 
     const insertProfile = db.prepare(
-      "INSERT INTO profile (name, bio, skills) VALUES (?, ?, ?)"
+      "INSERT INTO profile (name, nickname, bio, skills) VALUES (?, ?, ?, ?)"
     );
     const insertProject = db.prepare(
       "INSERT INTO projects (profile_id, title, description, tech) VALUES (?, ?, ?, ?)"
@@ -149,10 +165,11 @@ export function saveAllStudents(students: StudentData[]): void {
     for (const student of students) {
       const res = insertProfile.run(
         student.profile.name,
+        student.profile.nickname,
         student.profile.bio,
         student.profile.skills
       );
-      const profileId = res.lastInsertRowid;
+      const profileId = res.lastInsertRowid; // ดึง ID ที่เพิ่งถูกสร้างอัตโนมัติ
 
       for (const p of student.projects) {
         insertProject.run(profileId, p.title, p.description, p.tech);
