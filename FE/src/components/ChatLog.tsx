@@ -43,9 +43,9 @@ export default function ChatLog({
             <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
           </svg>
         </div>
-        <p className="chatlog-empty-title">Enterprise Creative Assistant พร้อมใช้งาน</p>
+        <p className="chatlog-empty-title">Linux Ai Chat พร้อมใช้งาน</p>
         <p className="chatlog-empty-hint">
-          เริ่มต้นด้วยการเลือก Quick Prompt Template ด้านซ้าย หรือพิมพ์สอบถามเกี่ยวกับสมาชิกและขอผลงานที่ต้องการ
+          หากสงสัยอะไรสามารถพูดคุยกับผู่ให้ข้อมูลของทีมเราได้เลย
         </p>
       </div>
     );

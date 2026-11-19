@@ -1,47 +1,70 @@
 import { saveAllStudents } from "./db";
 
-const GROUP_NAME = "CTRL+V";
+// 🎯 กำหนดชื่อกลุ่ม
+const GROUP_NAME = "Linux";
 
+// กำหนดรายชื่อนักศึกษา
 const students = [
   {
     profile: {
-      name: "นรินทร์ฤทธิ์",
-      bio: `INFP ,ชอบทำโมเดล 3D ,unity , blender, Substance 3D (สังกัดกลุ่ม: ${GROUP_NAME})`,
-      skills: "เขียนcode ได้นิดหน่อย , powerBI , exce , python, TypeScript, Fullstack",
+      name: "นรินทร์ฤทธิ์ หิรัญอาจ",
+      nickname: "คริส",
+      bio: `INFP, ชอบทำโมเดล 3D, Unity, Blender, Substance 3D มีความมุ่งมั่นในการผสานงานศิลปะ 3D เข้ากับระบบ Web (สังกัดกลุ่ม: ${GROUP_NAME})`,
+      skills: "UX/UI, 3D model, Unity, Blender, Substance 3D, Python, TypeScript, Fullstack",
     },
+    // 👉 คนนี้มี 3 โปรเจกต์ (คั่นด้วยคอมมา , ระหว่าง object)
     projects: [
       {
-        title: "WebTrade - ธนาคารแห่งนึง",
-        description: "trading, funding, crypto",
-        tech: "React, Express, SQLite",
+        title: "Little Artist Cat",
+        description: "ภาพวาดน้องแมวจิตรกรตัวน้อยกำลังวาดภาพทิวทัศน์สีพาสเทลสุดละมุนในห้องทำงานอบอุ่น",
+        tech: "Illustration, Digital Art",
       },
       {
-        title: "Cloud Infrastructure Monitor",
-        description: "ระบบแดชบอร์ดมอนิเตอร์สถานะเซิร์ฟเวอร์และแจ้งเตือนอัตโนมัติบน Kubernetes Cluster",
-        tech: "Golang, React, Kubernetes, Docker",
+        title: "Animated Fox 3D (GLTF)",
+        description: "โมเดลสุนัขจิ้งจอกแบบ Rigged ที่โหลดจากไฟล์ GLB ด้วย GLTFLoader พร้อมอนิเมชัน หมุนชมได้ 360 องศา",
+        tech: "Blender, GLTF/GLB, Three.js / Web 3D",
+      },
+      {
+        title: "Torus Knot Dimension",
+        description: "โมเดลรูปทรงเรขาคณิตชั้นสูงแบบ Torus Knot เคลือบพื้นผิวเงาวาวแบบ Metallic",
+        tech: "3D Modeling, Substance 3D, Web 3D",
       },
     ],
   },
   {
     profile: {
-      name: "พงศกร",
+      name: "พงศกร เจิมเจิดพล",
+      nickname: "เอ",
       bio: `สาย Frontend ตัวตึง ทำ UI สวยเนี๊ยบ, ชอบทำงานเป็นทีม , เฟรนลี่มากๆ , อะไรที่ไม่ถูกจะบอกตรงๆ (สังกัดกลุ่ม: ${GROUP_NAME})`,
-      skills: "concert production, React, python , BullMQ , MinIO",
+      skills: "concert production, React, python , BullMQ , MinIO, stage drawing, lighting design, live sound engineer, concert systems design, langchain , Rust, Recharts , CanvasJS",
     },
+    // 👉 คนนี้มีโปรเจกต์ 2
     projects: [
       {
-        title: "E-Commerce Shop",
-        description: "ระบบร้านค้าออนไลน์พร้อมระบบตะกร้าสินค้า",
-        tech: "Vue.js, Node.js, PostgreSQL",
+        title: "E-Commerce Market",
+        description: "ระบบร้านค้าออนไลน์ที่ขายModel3D SoundTrack SoundEffect Project complete 100%",
+        tech: "Vue.js, Node.js, PostgreSQL,Three.js,MinIO,Rechart,Typescript,TailwindCSS,BullMQ,Stripe,Omise,",
+      },
+      {
+        title: "Webshop-Hosting",
+        description: "ระบบ Monorepo  SaaS E-Commerce แบบ Multi-Tenant Project complete 70%",
+        tech: "Vue.js, Node.js, PostgreSQL,MinIO,Rechart,Typescript,TailwindCSS,BullMQ,Stripe,Omise,CanvasJS,",
+      },
+      {
+        title: "Stage-Drawing-Design",
+        description: "ออกแบบโครงสวร้างเวทีคอนเสริร์ชขนาด 20 เมตร",
+        tech: "Capture Visualization",
       },
     ],
   },
   {
     profile: {
-      name: "ปิยวัฒน์",
+      name: "ปิยวัฒน์ ชื่นมีเชาว์",
+      nickname: "หมู",
       bio: `สนใจการทำเกมมือถือ, ออกแบบเกมคอม, การทำอนิเมชั่น, เน้นเอนเตอร์เทน (สังกัดกลุ่ม: ${GROUP_NAME})`,
       skills: "Python, FastAPI, Docker, Penetration Testing",
     },
+    // 👉 คนนี้มีโปรเจกต์เดียว
     projects: [
       {
         title: "Game Chat App",
@@ -52,24 +75,28 @@ const students = [
   },
   {
     profile: {
-      name: "อุชุตา",
+      name: "อุชุตา ศรีทองสุข",
+      nickname: "อุ๊",
       bio: `สนใจด้านการเขียนโปรแกรมและออกแบบ ux/ui (figma) (สังกัดกลุ่ม: ${GROUP_NAME})`,
       skills: "python, html เบื้องต้น",
     },
+    // 👉 คนนี้มีโปรเจกต์เดียว
     projects: [
       {
-        title: "Warehouse Management Dashboard",
-        description: "ระบบแดชบอร์ดจัดการสต็อกสินค้าและเส้นทางจัดส่งสำหรับแอดมิน",
-        tech: "Figma, Vue.js",
+        title: "โปรเจกต์ Chat AI พร้อม Portfolio ของกลุ่ม linux",
+        description: "พัฒนา Front-end เว็บไซต์ Chat AI และ Portfolio ด้วย Figma, HTML, CSS, JS",
+        tech: "figma, html, css, js",
       },
     ],
   },
   {
     profile: {
-      name: "มนัสชนก",
+      name: "มนัสชนก สิมบุตร",
+      nickname: "ไอซ์",
       bio: `สนใจในการทำchat bot คอมพิวเตอร์วิชั่น เเละการทำเว็บดีไซน์ (สังกัดกลุ่ม: ${GROUP_NAME})`,
       skills: "python,c++, html,css,SQL",
     },
+    // 👉 คนนี้มีโปรเจกต์เดียว
     projects: [
       {
         title: "Mini Chat",
@@ -80,5 +107,6 @@ const students = [
   },
 ];
 
+// บันทึกข้อมูลทั้งหมดลงฐานข้อมูล
 saveAllStudents(students);
-console.log(`[seed] บันทึกข้อมูลนักศึกษา ${students.length} คน (กลุ่ม: ${GROUP_NAME}) เรียบร้อยแล้ว`);
+console.log(`✅ บันทึกข้อมูลนักศึกษา ${students.length} คน (กลุ่ม: ${GROUP_NAME}) เรียบร้อยแล้ว!`);

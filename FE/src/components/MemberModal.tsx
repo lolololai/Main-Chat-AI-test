@@ -75,7 +75,7 @@ export default function MemberModal({
                 <circle cx="8.5" cy="8.5" r="1.5"/>
                 <polyline points="21 15 16 10 5 21"/>
               </svg>
-              <span>ผลงานรูปภาพ & Asset ทั้งหมด ({member.artworks.length})</span>
+              <span>รูปภาพผลงาน ({member.artworks.length})</span>
             </h4>
 
             <div className="pro-modal-artworks-grid">
@@ -106,7 +106,7 @@ export default function MemberModal({
                 <polyline points="16 18 22 12 16 6"/>
                 <polyline points="8 6 2 12 8 18"/>
               </svg>
-              <span>โปรเจกต์ที่ร่วมพัฒนา ({member.projects.length})</span>
+              <span>โปรเจกต์ที่ผ่านมา({member.projects.length})</span>
             </h4>
 
             <div className="pro-modal-projects-list">

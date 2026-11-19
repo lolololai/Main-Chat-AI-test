@@ -20,7 +20,7 @@ const MEMBERS: MemberCardData[] = [
   {
     name: "พงศกร เจิมเจิดพล",
     role: "Front-end",
-    photo: "profiles/icon_profile01.png",
+    photo: "profiles/profile-A.jpg",
     skills: ["Tailwind.css", "React", "TypeScript", "NextJS"],
     work: "ดูแลส่วน Front-end ของโปรเจกต์ Chat AI พร้อม Portfolio ของกลุ่ม linux",
     email: "pongsakorn.jerm@bumail.net",
@@ -33,7 +33,7 @@ const MEMBERS: MemberCardData[] = [
   {
     name: "นรินทร์ฤทธิ์ หิรัญอาจ",
     role: "Back-end",
-    photo: "images/member_portrait_one_1794740320754.jpg",
+    photo: "profiles/profile-clis.png",
     skills: ["UX/UI", "3D model", "html", ".json", "css", "llm"],
     work: "ดูแลส่วน Back-end ของโปรเจกต์ Chat AI พร้อม Portfolio ของกลุ่ม linux",
     email: "narinlit.hirn@bumail.net",
@@ -46,7 +46,7 @@ const MEMBERS: MemberCardData[] = [
   {
     name: "มนัสชนก สิมบุตร",
     role: "Chat bot",
-    photo: "images/member_portrait_one_1794740320754.jpg",
+    photo: "profiles/profile-ice.jpg",
     skills: ["html", "js", "css"],
     work: "ดูแลส่วน Chat bot ของโปรเจกต์ Chat AI พร้อม Portfolio ของกลุ่ม linux",
     email: "manatchanok.simb@bumail.net",
@@ -59,7 +59,7 @@ const MEMBERS: MemberCardData[] = [
   {
     name: "อุชุตา ศรีทองสุข",
     role: "Front-end",
-    photo: "images/member_portrait_one_1794740320754.jpg",
+    photo: "profiles/profile_uchuta.jpg",
     skills: ["html", "js", "css"],
     work: "ดูแลส่วน Front-end ของโปรเจกต์ Chat AI พร้อม Portfolio ของกลุ่ม linux",
     email: "uchuta.srit@bumail.net",
@@ -72,7 +72,7 @@ const MEMBERS: MemberCardData[] = [
   {
     name: "ปิยวัฒน์ ชื่นมีเชาว์",
     role: "Back-end",
-    photo: "images/member_portrait_one_1794740320754.jpg",
+    photo: "profiles/profile-moo.jpg",
     skills: ["js", "unity", "rigging", "android studio", "vscode"],
     work: "ดูแลส่วน Back-end ของโปรเจกต์ Chat AI พร้อม Portfolio ของกลุ่ม linux",
     email: "piyawat.chue@bumail.net",

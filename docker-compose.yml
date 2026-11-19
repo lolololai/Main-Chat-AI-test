@@ -31,5 +31,21 @@ services:
       - be
     restart: unless-stopped
 
+  # Production (nginx) — เสิร์ฟ public/ จากโฮสต์โดยตรง
+  # เพิ่มรูปเข้า FE/public/ ปุ๊บ เว็บเห็นปั๊บ ไม่ต้อง rebuild image
+  # รันด้วย: docker compose --profile prod up -d fe-prod  (เข้า http://localhost:8080)
+  fe-prod:
+    profiles: ["prod"]
+    build:
+      context: ./FE
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+    volumes:
+      - ./FE/public:/usr/share/nginx/public:ro
+    depends_on:
+      - be
+    restart: unless-stopped
+
 volumes:
   db_data:

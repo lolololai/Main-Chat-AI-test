@@ -108,6 +108,14 @@ FE/
 
 ## ข้อควรระวังเรื่อง public/
 
-Vite เสิร์ฟไฟล์ใน `public/` ที่ root (เช่น `/mockup/retro-torus.png`) ถ้าเพิ่มไฟล์ใหม่ลง `public/` ขณะที่ Docker container รันอยู่ ต้อง restart container FE มิเช่นนั้น Vite จะยังตอบ HTML แทนไฟล์นั้น
+Vite เสิร์ฟไฟล์ใน `public/` ที่ root (เช่น `/mockup/retro-torus.png`)
+
+**เพิ่มไฟล์ใหม่แล้วเห็นทันที (ไม่ต้อง restart / rebuild):**
+
+- **Dev:** plugin `livePublicAssets` ใน `vite.config.ts` เสิร์ฟไฟล์จาก `public/` โดย stat จากดิสก์ทุก request (กันกรณี watcher ของ Docker พลาด event) และคอย copy ไฟล์ `public/` → `dist/` ให้เองเมื่อ add/change/unlink
+- **Production:** `Dockerfile` copy `public/` ไป `/usr/share/nginx/public` และ `nginx.conf` serve ตำแหน่งนี้ก่อน fallback ไป `dist/` — ใน docker-compose มี service `fe-prod` (profile `prod`) ที่ mount `./FE/public` เข้าไป → เพิ่มรูปปุ๊บเห็นปั๊บ
+  ```bash
+  docker compose --profile prod up -d fe-prod   # http://localhost:8080
+  ```
 
 ห้ามใช้ path แบบเครื่อง เช่น `bu-web-technology-week-9-afternoon-chat-ui/FE/public/mockup/...` ใน `imageUrl` — ต้องเป็น `/mockup/...`
