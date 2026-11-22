@@ -1,0 +1,26 @@
+stages:
+  - test
+  ##new stage name deploy
+  - deploy
+
+test-be:
+  stage: test
+  image: node:24-alpine
+  script:
+    - cd BE
+    - npm ci
+    - npm run check
+    - npm test
+
+## new job name deploy-success
+deploy-be-success:
+  stage: deploy
+  image: node:24-alpine
+  script:
+    - echo "Deployment backend successful!"
+
+deploy-fe-success:
+  stage: deploy
+  image: node:24-alpine
+  script:
+    - echo "Deployment fontend successful!"
