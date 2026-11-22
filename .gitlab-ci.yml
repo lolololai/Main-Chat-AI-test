@@ -1,6 +1,6 @@
 stages:
   - test
-  ##new stage name deploy
+  - build
   - deploy
 
 test-be:
@@ -9,18 +9,57 @@ test-be:
   script:
     - cd BE
     - npm ci
-    - npm run check
-    - npm test
+    - npm run build
 
-## new job name deploy-success
-deploy-be-success:
-  stage: deploy
+test-fe:
+  stage: test
   image: node:24-alpine
   script:
-    - echo "Deployment backend successful!"
+    - cd FE
+    - npm ci
+    - npm run build
 
-deploy-fe-success:
-  stage: deploy
-  image: node:24-alpine
+.build-image:
+  stage: build
+  image: docker:27
+  services:
+    - docker:27-dind
+  variables:
+    DOCKER_TLS_CERTDIR: "/certs"
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+  before_script:
+    - echo "$DOCKERHUB_TOKEN" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
   script:
-    - echo "Deployment fontend successful!"
+    - docker build -t "$DOCKERHUB_USERNAME/$IMAGE:latest" -t "$DOCKERHUB_USERNAME/$IMAGE:$CI_COMMIT_SHORT_SHA" "./$DIR"
+    - docker push "$DOCKERHUB_USERNAME/$IMAGE" --all-tags
+
+build-be:
+  extends: .build-image
+  variables:
+    IMAGE: chat-ai-be
+    DIR: BE
+
+build-fe:
+  extends: .build-image
+  variables:
+    IMAGE: chat-ai-fe
+    DIR: FE
+
+.deploy:
+  stage: deploy
+  image:
+    name: curlimages/curl:8.10.1
+    entrypoint: [""]
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+
+deploy-be:
+  extends: .deploy
+  script:
+    - curl -fsS -X POST "$RENDER_DEPLOY_HOOK_BE"
+
+deploy-fe:
+  extends: .deploy
+  script:
+    - curl -fsS -X POST "$RENDER_DEPLOY_HOOK_FE"
