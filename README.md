@@ -13,7 +13,7 @@ cd Main-Chat-AI
 
 | BE | `npm run dev` | รัน BE (restart เองเมื่อแก้ไฟล์) |
 | BE | `npm run check` | ตรวจ TypeScript |
-| BE | `npm run seed` | seed ข้อมูลลง SQLite |
+| BE | `npm run seed` | seed ข้อมูลลง PostgreSQL |
 | FE | `npm run dev` | รัน Vite dev server |
 | FE | `npm run typecheck` | ตรวจ TypeScript ฝั่ง FE |
 | FE | `npm run build` | build production |

@@ -14,4 +14,4 @@ COPY src/ ./src/
 EXPOSE 3000
 
 # รันผ่าน tsx (ไม่ใช้ --watch เพื่อให้เหมาะกับ container)
-CMD ["npx", "tsx", "src/app.ts"]
+CMD ["sh", "-lc", "if [ \"$SEED_ON_START\" = \"true\" ]; then npx tsx src/seed.ts || exit 1; fi; exec npx tsx src/app.ts"]

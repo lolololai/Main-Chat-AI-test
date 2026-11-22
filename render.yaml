@@ -10,6 +10,14 @@ services:
     envVars:
       - key: PORT
         value: "3000"
+      - key: DATABASE_URL
+        sync: false
+      - key: LLM_API_KEY
+        sync: false
+      - key: CORS_ORIGINS
+        sync: false
+      - key: SEED_ON_START
+        value: "true"
 
   - type: staticSite
     name: main-chat-ai-fe

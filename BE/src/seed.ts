@@ -12,7 +12,6 @@ const students = [
       bio: `INFP, ชอบทำโมเดล 3D, Unity, Blender, Substance 3D มีความมุ่งมั่นในการผสานงานศิลปะ 3D เข้ากับระบบ Web (สังกัดกลุ่ม: ${GROUP_NAME})`,
       skills: "UX/UI, 3D model, Unity, Blender, Substance 3D, Python, TypeScript, Fullstack",
     },
-    // 👉 คนนี้มี 3 โปรเจกต์ (คั่นด้วยคอมมา , ระหว่าง object)
     projects: [
       {
         title: "Little Artist Cat",
@@ -38,7 +37,6 @@ const students = [
       bio: `สาย Frontend ตัวตึง ทำ UI สวยเนี๊ยบ, ชอบทำงานเป็นทีม , เฟรนลี่มากๆ , อะไรที่ไม่ถูกจะบอกตรงๆ (สังกัดกลุ่ม: ${GROUP_NAME})`,
       skills: "concert production, React, python , BullMQ , MinIO, stage drawing, lighting design, live sound engineer, concert systems design, langchain , Rust, Recharts , CanvasJS",
     },
-    // 👉 คนนี้มีโปรเจกต์ 2
     projects: [
       {
         title: "E-Commerce Market",
@@ -64,7 +62,6 @@ const students = [
       bio: `สนใจการทำเกมมือถือ, ออกแบบเกมคอม, การทำอนิเมชั่น, เน้นเอนเตอร์เทน (สังกัดกลุ่ม: ${GROUP_NAME})`,
       skills: "Python, FastAPI, Docker, Penetration Testing",
     },
-    // 👉 คนนี้มีโปรเจกต์เดียว
     projects: [
       {
         title: "Game Chat App",
@@ -80,7 +77,6 @@ const students = [
       bio: `สนใจด้านการเขียนโปรแกรมและออกแบบ ux/ui (figma) (สังกัดกลุ่ม: ${GROUP_NAME})`,
       skills: "python, html เบื้องต้น",
     },
-    // 👉 คนนี้มีโปรเจกต์เดียว
     projects: [
       {
         title: "โปรเจกต์ Chat AI พร้อม Portfolio ของกลุ่ม linux",
@@ -96,7 +92,6 @@ const students = [
       bio: `สนใจในการทำchat bot คอมพิวเตอร์วิชั่น เเละการทำเว็บดีไซน์ (สังกัดกลุ่ม: ${GROUP_NAME})`,
       skills: "python,c++, html,css,SQL",
     },
-    // 👉 คนนี้มีโปรเจกต์เดียว
     projects: [
       {
         title: "Mini Chat",
@@ -107,6 +102,14 @@ const students = [
   },
 ];
 
-// บันทึกข้อมูลทั้งหมดลงฐานข้อมูล
-saveAllStudents(students);
-console.log(`✅ บันทึกข้อมูลนักศึกษา ${students.length} คน (กลุ่ม: ${GROUP_NAME}) เรียบร้อยแล้ว!`);
+async function main() {
+  await saveAllStudents(students);
+  console.log(
+    `✅ บันทึกข้อมูลนักศึกษา ${students.length} คน (กลุ่ม: ${GROUP_NAME}) เรียบร้อยแล้ว!`,
+  );
+}
+
+main().catch((err) => {
+  console.error("❌ Seed error:", err);
+  process.exit(1);
+});

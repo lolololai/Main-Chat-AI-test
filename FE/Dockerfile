@@ -10,7 +10,10 @@ COPY tsconfig.json vite.config.ts index.html ./
 COPY public/ ./public/
 COPY src/ ./src/
 
-# Build ให้ FE ชี้ไปที่ BE ผ่าน /messages (nginx จะ proxy ต่อ)
+ARG VITE_BE_URL
+ENV VITE_BE_URL=$VITE_BE_URL
+
+# Vite ฝัง VITE_BE_URL ลง bundle ตอน build
 RUN npm run build
 
 # ---- Serve stage ----

@@ -25,11 +25,12 @@ const FALLBACK_REPLIES: string[] = [
 
 let warned = false;
 
-export function buildSystemPrompt(): string {
+export async function buildSystemPrompt(): Promise<string> {
+  const portfolioContext = await getPortfolioContext();
   return `${RULES}
 
 === ข้อมูล portfolio ===
-${getPortfolioContext()}
+${portfolioContext}
 === จบข้อมูล ===`;
 }
 
@@ -48,7 +49,7 @@ export async function getReply(
       Math.floor(Math.random() * FALLBACK_REPLIES.length)
     ];
   }
-  return askLlm(buildSystemPrompt(), [
+  return askLlm(await buildSystemPrompt(), [
     ...history,
     { role: "user", content: text },
   ]);
