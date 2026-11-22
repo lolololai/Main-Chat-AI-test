@@ -9,7 +9,7 @@ test-be:
   script:
     - cd BE
     - npm ci
-    - npm run build
+    - npm run check
 
 test-fe:
   stage: test
