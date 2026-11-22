@@ -31,7 +31,7 @@ test-fe:
   before_script:
     - echo "$DOCKERHUB_TOKEN" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
   script:
-    - docker build -t "$DOCKERHUB_USERNAME/$IMAGE:latest" -t "$DOCKERHUB_USERNAME/$IMAGE:$CI_COMMIT_SHORT_SHA" "./$DIR"
+    - docker build --platform linux/amd64 --build-arg VITE_BE_URL="https://chat-ai-be-latest.onrender.com" -t "$DOCKERHUB_USERNAME/$IMAGE:latest" -t "$DOCKERHUB_USERNAME/$IMAGE:$CI_COMMIT_SHORT_SHA" "./$DIR"
     - docker push "$DOCKERHUB_USERNAME/$IMAGE" --all-tags
 
 build-be:
